@@ -7,6 +7,7 @@
         name="description"
         content="Zelda: Oracle of Seasons was released on the Gameboy Color on February 27th, 2001. This website will walk you through the manyr eason why this is an undeniable fact that cannot be disputed by any living person."
     />
+    <link rel="stylesheet" href="styles.css">
     <title>Oracle of Seasons: The best Zelda game on the Gameboy Color</title>
 </head>
 
@@ -14,32 +15,37 @@
     <header>
         <img src="images/OoS_Logo.png" alt="English logo for Zelda: Oracle of Seasons" height="250px">
         <h1>The <em>best</em> Zelda game for the Gameboy Color.</h1>
-        <h2>Table of Contents:</h2>
-        <p>
-            <ol>
-                <li>The intro</li>
-                <li>The sprites</li>
-                <li>The characters</li>
-                <li>The exploration</li>   
-            </ol>
-        </p>
     </header>
 
     <main>
-        <section>
-            <h2>Reason 1: The Intro</h2>
-            <a href="https://www.youtube.com/watch?v=eY2Bc1-nOXg">Watch this...</a>
+        <section id="tableofcontents"> <!--Make horizontal row of cards with section name over vignetted background image-->
+            <h2>Table of Contents :</h2>
+            <div>
+                <a href="#reason1" class="toc selectable">1.THE INTRO</a>
+                <a href="#reason2" class="toc selectable">2.THE SPRITES</a>
+                 <a href="#reason3" class="toc selectable">3.THE CHARACTERS</a>
+                 <a href="#reason4" class="toc selectable">4.THE EXPLORATION</a>
+             </div>
         </section>
-        <section>
-            <h2>Reason 2: The Sprites</h2>
+
+        <section id="reason1">
+            <h2>Reason 1 : The Intro</h2>
+            <a href="https://www.youtube.com/watch?v=eY2Bc1-nOXg" class="selectable"><img src="images/IntroClose.PNG" alt="Link rears a horse into the air very cool like.">
+            </a>
+        </section>
+
+        <section id="reason2">
+            <h2>Reason 2 : The Sprites</h2>
             <!-- Gallery of sprites, highlighting Dimitri the Dodongo -->
         </section>
-        <section>
-            <h2>Reason 3: The Characters</h2>
+
+        <section id="reason3">
+            <h2>Reason 3 : The Characters</h2>
             <!-- Intros of whimsical chararacters; Maple, Rocky, Blaino, DIMITRI THE DODONGO. -->
         </section>
-        <section>
-            <h2>Reason 4: The Exploration</h2>
+
+        <section id="reason4">
+            <h2>Reason 4 : The Exploration</h2>
             <!-- Showcase of travel mechanisms; Seasons, Swimming, Mounts, DIMITRI CAN SWIM. -->
         </section>
     </main>
