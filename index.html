@@ -23,14 +23,14 @@
             <div>
                 <a href="#reason1" class="toc selectable">1.THE INTRO</a>
                 <a href="#reason2" class="toc selectable">2.THE SPRITES</a>
-                 <a href="#reason3" class="toc selectable">3.THE CHARACTERS</a>
-                 <a href="#reason4" class="toc selectable">4.THE EXPLORATION</a>
+                <a href="#reason3" class="toc selectable">3.THE CHARACTERS</a>
+                <a href="#reason4" class="toc selectable">4.THE EXPLORATION</a>
              </div>
         </section>
 
         <section id="reason1">
             <h2>Reason 1 : The Intro</h2>
-            <a href="https://www.youtube.com/watch?v=eY2Bc1-nOXg" class="selectable"><img src="images/IntroClose.PNG" alt="Link rears a horse into the air very cool like.">
+            <a href="https://www.youtube.com/watch?v=eY2Bc1-nOXg"><img class="selectable" src="images/IntroClose.PNG" alt="Link rears a horse into the air very cool like.">
             </a>
         </section>
 
@@ -55,5 +55,25 @@
             &copy; Diego Caskey 2026
         </p>
     </footer>
+
+    <!-- Sound Effects Stored In "sounds" Folder -->
+    <audio id="hoverSound" src="sounds/Oracle_Menu_Cursor.wav"></audio>
+    <audio id="clickSound" src="sounds/Oracle_Menu_Select.wav"></audio>
+    <!-- JavaScript For Hover & Select Audio Functionality -->
+    <script>
+        const hoverSound = document.getElementById('hoverSound');
+        const clickSound = document.getElementById('clickSound');
+        const links = document.querySelectorAll('a');
+        links.forEach(a => {
+            a.addEventListener('mouseenter', () => {
+                hoverSound.currentTime = 0;
+                hoverSound.play();
+            });
+            a.addEventListener('click', () => {
+                clickSound.currentTime = 0;
+                clickSound.play();
+            });
+        });
+    </script>
 </body>
 </html>
