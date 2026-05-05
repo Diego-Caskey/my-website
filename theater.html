@@ -13,14 +13,25 @@
 </head>
 
 <body>
+
+
     <main>
-        <div class="gameboy-container">
-            <img src="images/GameboyFrame.png" alt="Frame of a silver Gameboy">
-            <div class="theaterscreen">
-                <video autoplay loop>
+        <div id="controls-box">
+            <h3>CONTROLS</h3>
+            <p><span class="controls-red">A</span> = PLAY INTRO</p>
+            <p><span class="controls-red">B</span> = GO BACK</p>
+        </div>
+
+        <div id="gameboy-full">
+            <img src="images/GameboyFrame.png" alt="Frame of a silver Gameboy" id="gameboy-body">
+            <div id="gameboy-shading"></div>
+            <div id="gameboy-screen">
+                <video id="IntroVideo">
                     <source src="videos/Intro.mp4">
                 </video>
             </div>
+            <div id="buttonA"></div>
+            <div id="buttonB"></div>
         </div>
     </main>
     
@@ -29,5 +40,42 @@
             &copy; Diego Caskey 2026
         </p>
     </footer>
+
+    <!-- Sound Effects Stored In "sounds" Folder -->
+    <audio id="entrySound" src="sounds/Oracle_Stairs.wav" autoplay></audio>
+    <audio id="openSound" src="sounds/Oracle_PauseMenu_Open.wav"></audio>
+    <audio id="closeSound" src="sounds/Oracle_PauseMenu_Close.wav"></audio>
+
+
+    <!-- JavasScript to enable page tansition sound -->
+    <script>
+        window.addEventListener('load', () => {
+        document.getElementById('entrySound').play();
+        });
+    </script>
+
+    <!-- JS to enable button presses -->
+     <script>
+        const introVideo = document.getElementById('IntroVideo');
+        const buttonA = document.getElementById('buttonA');
+        const buttonB = document.getElementById('buttonB');
+        const openSound = document.getElementById('openSound');
+        const closeSound = document.getElementById('closeSound');
+
+    buttonA.addEventListener('click', () => {
+        openSound.currentTime = 0;
+        openSound.play();
+        introVideo.currentTime = 0;
+        introVideo.play();
+    });
+
+    buttonB.addEventListener('click', () => {
+        closeSound.currentTime = 0;
+        closeSound.play();
+        setTimeout(() => {
+            window.location.href = 'index.html';
+        }, 300);
+    });
+    </script>
 </body>
 </html>
