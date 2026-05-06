@@ -59,7 +59,6 @@ main p {
 header {
     text-align: center;
     font-family: ZeldaOracle;
-    margin-bottom: 2rem;
     background-image: url(images/Sky.jpg);
     background-size: cover;
     background-position: center;
@@ -67,13 +66,15 @@ header {
 
 header img {
     margin-top: 2rem;
+    margin-bottom: 2rem;
     filter: drop-shadow(0px 0px 20px rgba(255, 255, 255, 0.8));
 }
 
 h1 {
+    text-align: center;
     color: rgb(0, 0, 0);
     background-color: rgba(151, 125, 65);
-    margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
 /* END HEADER */

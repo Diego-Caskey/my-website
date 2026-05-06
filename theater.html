@@ -13,24 +13,12 @@
 </head>
 
 <body>
-<<<<<<< HEAD
     <header>
         <img src="images/OoS_Logo.png" alt="English logo for Zelda: Oracle of Seasons" height="250px">
-        <h1>Intro Scene</h1>
+        <h1>Watch this...</h1>
     </header>
 
     <main>
-=======
-
-
-    <main>
-        <div id="controls-box">
-            <h3>CONTROLS</h3>
-            <p><span class="controls-red">A</span> = PLAY INTRO</p>
-            <p><span class="controls-red">B</span> = GO BACK</p>
-        </div>
-
->>>>>>> c0ec1835b8bd4065bfe647f5afbe6c4bc9ba2b4c
         <div id="gameboy-full">
             <img src="images/GameboyFrame.png" alt="Frame of a silver Gameboy" id="gameboy-body">
             <div id="gameboy-shading"></div>
@@ -52,14 +40,8 @@
 
     <!-- Sound Effects Stored In "sounds" Folder -->
     <audio id="entrySound" src="sounds/Oracle_Stairs.wav" autoplay></audio>
-<<<<<<< HEAD
     <audio id="aSound" src="sounds/Oracle_PauseMenu_Open.wav"></audio>
     <audio id="bSound" src="sounds/Oracle_PauseMenu_Close.wav"></audio>
-=======
-    <audio id="openSound" src="sounds/Oracle_PauseMenu_Open.wav"></audio>
-    <audio id="closeSound" src="sounds/Oracle_PauseMenu_Close.wav"></audio>
-
->>>>>>> c0ec1835b8bd4065bfe647f5afbe6c4bc9ba2b4c
 
     <!-- JavasScript to enable page tansition sound -->
     <script>
@@ -69,7 +51,6 @@
     </script>
 
     <!-- JS to enable button presses -->
-<<<<<<< HEAD
     <script>
         const introVideo = document.getElementById('IntroVideo');
         const buttonA = document.getElementById('buttonA');
@@ -91,29 +72,6 @@
             window.location.href = 'index.html';
             }, 300);
         });    
-=======
-     <script>
-        const introVideo = document.getElementById('IntroVideo');
-        const buttonA = document.getElementById('buttonA');
-        const buttonB = document.getElementById('buttonB');
-        const openSound = document.getElementById('openSound');
-        const closeSound = document.getElementById('closeSound');
-
-    buttonA.addEventListener('click', () => {
-        openSound.currentTime = 0;
-        openSound.play();
-        introVideo.currentTime = 0;
-        introVideo.play();
-    });
-
-    buttonB.addEventListener('click', () => {
-        closeSound.currentTime = 0;
-        closeSound.play();
-        setTimeout(() => {
-            window.location.href = 'index.html';
-        }, 300);
-    });
->>>>>>> c0ec1835b8bd4065bfe647f5afbe6c4bc9ba2b4c
     </script>
 </body>
 </html>
