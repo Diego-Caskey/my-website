@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="description"
+        content="Zelda: Oracle of Seasons was released on the Gameboy Color on February 27th, 2001. This website will walk you through the manyr eason why this is an undeniable fact that cannot be disputed by any living person."
+    />
+    <link rel="stylesheet" href="STYLE_index.css">
+    <link rel="stylesheet" href="STYLE_gallery.css">
+    <title>Oracle of Seasons: The best Zelda game on the Gameboy Color</title>
+</head>
+
+<body>
+    <header>
+        <img src="images/OoS_Logo.png" alt="English logo for Zelda: Oracle of Seasons" height="250px">
+        <h1>SPRITE GALLERY</h1>
+    </header>
+
+    <main>
+        <div class="sprite-grid">
+            <div class="sprite-card">
+                <h2>- LINK -</h2>
+                <img src="sprites/Sprites_Link.png" alt="Link spritesheet">
+            </div>
+            <div class="sprite-card">
+                <h2>- ZELDA -</h2>
+                <img src="sprites/Sprites_Zelda.png" alt="Zelda spritesheet">
+            </div>
+            <div class="sprite-card">
+                <h2>- NPCs -</h2>
+                <img src="sprites/Sprites_Traders.png" alt="Traders spritesheet">
+            </div>
+            <div class="sprite-card">
+                <h2>- MAPLE -</h2>
+                <img src="sprites/Sprites_Maple.png" alt="Maple spritesheet">
+            </div>
+            <div class="sprite-card">
+                <h2>- RICKY -</h2>
+                <img src="sprites/Sprites_Ricky.png" alt="Ricky spritesheet">
+            </div>
+            <div class="sprite-card">
+                <h2>- DIMITRI -</h2>
+                <img src="sprites/Sprites_Dimitri.png" alt="Dimitri spritesheet">
+            </div>
+            <div class="sprite-card">
+                <h2>- MOOSH -</h2>
+                <img src="sprites/Sprites_Moosh.png" alt="Moosh spritesheet">
+            </div>
+            <div class="sprite-card">
+                <h2>- ENEMIES -</h2>
+                <img src="sprites/Sprites_Enemies.png" alt="Enemies spritesheet">
+            </div>
+            <div class="sprite-card">
+                <h2>- ORACLES -</h2>
+                <img src="sprites/Sprites_Oracles.png" alt="Oracles spritesheet">
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; Diego Caskey 2026</p>
+    </footer>
+
+    <!-- Sound Effects Stored In "sounds" Folder -->
+    <audio id="entrySound" src="sounds/Oracle_Stairs.wav" autoplay></audio>
+
+    <!-- JavasScript to enable page tansition sound -->
+    <script>
+        window.addEventListener('load', () => {
+        document.getElementById('entrySound').play();
+        });
+    </script>
+    
+    <!-- JS for efficient column stacking -->
+    <script>
+        function masonryLayout() {
+            const grid = document.querySelector('.sprite-grid');
+            const cards = [...document.querySelectorAll('.sprite-card')];
+            const columnCount = 3;
+            const gap = 16;
+        
+            grid.style.position = 'relative';
+        
+            const columnWidth = (grid.offsetWidth - (gap * (columnCount - 1))) / columnCount;
+            const columnHeights = new Array(columnCount).fill(0);
+        
+            cards.forEach(card => {
+                card.style.position = 'absolute';
+                card.style.width = columnWidth + 'px';
+            
+                const shortestColumn = columnHeights.indexOf(Math.min(...columnHeights));
+                const x = shortestColumn * (columnWidth + gap);
+                const y = columnHeights[shortestColumn];
+            
+                card.style.left = x + 'px';
+                card.style.top = y + 'px';
+            
+                columnHeights[shortestColumn] += card.offsetHeight + gap;
+            });
+        
+            grid.style.height = Math.max(...columnHeights) + 'px';
+        }
+
+        window.addEventListener('load', masonryLayout);
+        window.addEventListener('resize', masonryLayout);
+    </script>
+</body>
+</html>

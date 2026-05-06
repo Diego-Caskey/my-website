@@ -7,20 +7,28 @@
         name="description"
         content="Zelda: Oracle of Seasons was released on the Gameboy Color on February 27th, 2001. This website will walk you through the manyr eason why this is an undeniable fact that cannot be disputed by any living person."
     />
-    <link rel="stylesheet" href="style1.css">
-    <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="STYLE_index.css">
+    <link rel="stylesheet" href="STYLE_theater.css">
     <title>Oracle of Seasons: The best Zelda game on the Gameboy Color</title>
 </head>
 
 <body>
+    <header>
+        <img src="images/OoS_Logo.png" alt="English logo for Zelda: Oracle of Seasons" height="250px">
+        <h1>Intro Scene</h1>
+    </header>
+
     <main>
-        <div class="gameboy-container">
-            <img src="images/GameboyFrame.png" alt="Frame of a silver Gameboy">
-            <div class="theaterscreen">
-                <video autoplay loop>
+        <div id="gameboy-full">
+            <img src="images/GameboyFrame.png" alt="Frame of a silver Gameboy" id="gameboy-body">
+            <div id="gameboy-shading"></div>
+            <div id="gameboy-screen">
+                <video id="IntroVideo">
                     <source src="videos/Intro.mp4">
                 </video>
             </div>
+            <div id="buttonA"></div>
+            <div id="buttonB"></div>
         </div>
     </main>
     
@@ -29,5 +37,41 @@
             &copy; Diego Caskey 2026
         </p>
     </footer>
+
+    <!-- Sound Effects Stored In "sounds" Folder -->
+    <audio id="entrySound" src="sounds/Oracle_Stairs.wav" autoplay></audio>
+    <audio id="aSound" src="sounds/Oracle_PauseMenu_Open.wav"></audio>
+    <audio id="bSound" src="sounds/Oracle_PauseMenu_Close.wav"></audio>
+
+    <!-- JavasScript to enable page tansition sound -->
+    <script>
+        window.addEventListener('load', () => {
+        document.getElementById('entrySound').play();
+        });
+    </script>
+
+    <!-- JS to enable button presses -->
+    <script>
+        const introVideo = document.getElementById('IntroVideo');
+        const buttonA = document.getElementById('buttonA');
+        const buttonB = document.getElementById('buttonB');
+        const aSound = document.getElementById('aSound');
+        const bSound = document.getElementById('bSound');
+
+        buttonA.addEventListener('click', () => {
+            aSound.currentTime = 0;
+            aSound.play();
+            introVideo.currentTime = 0;
+            introVideo.play();
+        });
+
+        buttonB.addEventListener('click', () => {
+            bSound.currentTime = 0;
+            bSound.play();
+            setTimeout(() => {
+            window.location.href = 'index.html';
+            }, 300);
+        });    
+    </script>
 </body>
 </html>

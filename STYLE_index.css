@@ -1,0 +1,164 @@
+/* BEGIN GENERAL */
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color:wheat
+}
+
+section {
+    margin-bottom: 1.25rem;
+}
+
+main h2 {
+    font-family: ZeldaOracle;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 2.5rem;
+    color: rgba(153, 20, 35);
+}
+
+main p {
+    font-family: ZeldaOracle;
+    text-align: left;
+    padding-top: 1rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    font-size: 1rem;
+    color: rgb(0, 0, 0);
+}
+
+@font-face {
+    font-family: ZeldaOracle;
+    src: url(fonts/ZeldaOracle.ttf);
+}
+
+@font-face {
+    font-family: ZeldaAwakening;
+    src: url(fonts/ZeldaAwakening.ttf);
+}
+
+@keyframes blink {
+    0%   { outline-color: rgba(153, 20, 35); }
+    50%  { outline-color: transparent; }
+    100% { outline-color: rgba(153, 20, 35); }
+}
+
+.selectable:hover {
+    outline: 3px solid rgba(153, 20, 35); /*Doesn't use relative measurements to keep selector frame uniform for all sizes of selectable elements*/
+    animation: blink 1.25s step-end infinite;
+}
+
+/* END GENERAL */
+
+/* BEGIN HEADER */
+
+header {
+    text-align: center;
+    font-family: ZeldaOracle;
+    margin-bottom: 2rem;
+    background-image: url(images/Sky.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+header img {
+    margin-top: 2rem;
+    filter: drop-shadow(0px 0px 20px rgba(255, 255, 255, 0.8));
+}
+
+h1 {
+    color: rgb(0, 0, 0);
+    background-color: rgba(151, 125, 65);
+    margin-top: 2rem;
+}
+
+/* END HEADER */
+
+/* BEGIN TOC */
+
+#tableofcontents {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.toc {
+    font-family: ZeldaAwakening;
+    padding: 1rem;
+    gap: 1rem;
+}
+
+a.toc {
+    text-decoration: none;
+    font-weight: bold;
+    color: rgba(77, 28, 134)
+}
+
+/* END TOC */
+
+/* BEGIN REASON 1 */
+
+#reason1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#reason1 img {
+    max-height: 25rem;
+    max-width: 25rem;
+}
+
+/* END REASON 1 */
+
+/* BEGIN REASON 2 */
+
+.sprite-banner {
+    width: 100%;
+    overflow: hidden;
+    cursor: pointer;
+    height: 150px;
+}
+
+.sprite-track {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    animation: conveyor 60s linear infinite;
+}
+
+.sprite-track img {
+    height: 150px;
+    width: auto;
+    image-rendering: pixelated;
+    display: block;
+}
+
+@keyframes conveyor {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+#reason2 a {
+    display: block;
+    width: 100%;
+}
+
+#reason2 a.selectable:hover {
+    outline: 3px solid rgba(153, 20, 35);
+    animation: blink 1.25s step-end infinite;
+}
+
+/* END REASON 2 */
+
+/* BEGIN FOOTER */
+
+footer {
+    font-family: ZeldaAwakening;
+}
+
+/* END FOOTER */
