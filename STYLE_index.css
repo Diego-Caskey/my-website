@@ -48,7 +48,7 @@ main p {
 }
 
 .selectable:hover {
-    outline: 3px solid rgba(153, 20, 35); /*Doesn't use relative measurements to keep selector frame uniform for all sizes of selectable elements*/
+    outline: 3px solid rgba(153, 20, 35);
     animation: blink 1.25s step-end infinite;
 }
 
@@ -58,8 +58,67 @@ main p {
 
 #navbar {
     background-color: rgba(151, 125, 65);
-    padding-bottom: 1rem;
-    padding-top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.nav-back {
+    font-family: ZeldaAwakening;
+    text-decoration: none;
+    color: rgba(77, 28, 134);
+    font-weight: bold;
+    padding: 0.5rem;
+    margin-right: auto;
+}
+
+.nav-title {
+    font-family: ZeldaAwakening;
+    font-weight: bold;
+    color: wheat;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+}
+
+.nav-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.nav-dropdown-button {
+    font-family: ZeldaAwakening;
+    font-weight: bold;
+    color: rgba(77, 28, 134);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+
+.nav-dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: rgba(151, 125, 65);
+    width: max-content;
+    z-index: 100;
+    flex-direction: column;
+    border: 3px solid rgba(77, 28, 134);
+}
+
+.nav-dropdown:hover .nav-dropdown-content {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.nav-dropdown-content a {
+    display: block;
+    padding: 0.75rem 1.25rem;
 }
 
 /* END NAVBAR */
@@ -72,6 +131,7 @@ header {
     background-image: url(images/Sky.jpg);
     background-size: cover;
     background-position: center;
+    margin-bottom: 2rem;
 }
 
 header img {

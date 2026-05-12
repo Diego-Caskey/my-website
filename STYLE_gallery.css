@@ -22,6 +22,10 @@ h1 {
     background-color: rgba(151, 125, 65);
 }
 
+.red-text {
+    color: rgba(153, 20, 35);
+}
+
 .sprite-grid {
     columns: 3;
     column-gap: 1rem;
@@ -33,6 +37,11 @@ h1 {
     margin-bottom: 1rem;
     cursor: pointer;
     perspective: 600px;
+    transition: transform 0.3s ease;
+}
+
+.sprite-card:hover {
+    transform: scale(1.03);
 }
 
 .sprite-card-inner {
@@ -42,7 +51,7 @@ h1 {
     width: 100%;
 }
 
-.sprite-card:hover .sprite-card-inner {
+.sprite-card.flipped .sprite-card-inner {
     transform: rotateY(180deg);
 }
 

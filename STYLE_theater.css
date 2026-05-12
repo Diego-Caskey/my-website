@@ -5,6 +5,10 @@ main {
     min-height: 100vh;
 }
 
+.red-text {
+    color: rgba(153, 20, 35);
+}
+
 #gameboy-full {
     position: relative;
     display: inline-block;
@@ -15,7 +19,7 @@ main {
 
 #gameboy-body {
     display: block;
-    height: 90vh;
+    height: 100vh;
     width: auto;
     border-radius: 1rem;
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
@@ -49,7 +53,7 @@ main {
     aspect-ratio: 1/1;
     width: 13%;
     left: 77.65%;
-    bottom: 25.79%;
+    bottom: 25.80%;
     cursor: pointer;
     border-radius: 50%;
     background: rgba(255,0,0,0.3)
@@ -59,8 +63,8 @@ main {
     position: absolute;
     aspect-ratio: 1/1;
     width: 13%;
-    left: 59.27%;
-    bottom: 23.79%;
+    left: 59.19%;
+    bottom: 23.76%;
     cursor: pointer;
     border-radius: 50%;
     background: rgba(255,0,0,0.3)

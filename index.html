@@ -14,12 +14,18 @@
 <body>
     <header>
         <img src="images/OoS_Logo.png" alt="English logo for Zelda: Oracle of Seasons" height="250px">
-            <div id="navbar">
-                <a href="#reason1" class="toc selectable">1.THE INTRO</a>
-                <a href="#reason2" class="toc selectable">2.THE SPRITES</a>
-                <a href="#reason3" class="toc selectable">3.THE CHARACTERS</a>
-                <a href="#reason4" class="toc selectable">4.THE EXPLORATION</a>
+        <div id="navbar">
+            <div class="nav-dropdown">
+                <button class="nav-dropdown-button">&#9660; MENU</button>
+                <div class="nav-dropdown-content">
+                    <a href="#reason1" class="toc selectable">1.THE INTRO</a>
+                    <a href="#reason2" class="toc selectable">2.THE SPRITES</a>
+                    <a href="#reason3" class="toc selectable">3.THE CHARACTERS</a>
+                    <a href="#reason4" class="toc selectable">4.THE EXPLORATION</a>
+                </div>
             </div>
+            <span class="nav-title">THE BEST ZELDA GAME FOR THE GAMEBOY COLOR</span>
+        </div>
     </header>
 
     <main>
@@ -47,28 +53,33 @@
             </p>                
         </section>
 
-        <section id="reason3"> <!-- Intros of whimsical chararacters; Maple, Rocky, Blaino, DIMITRI THE DODONGO. -->
+        <section id="reason3">
             <h2>Reason 3 : The Characters</h2>
         </section>
 
         <section id="reason4">
             <h2>Reason 4 : The Exploration</h2>
-            <!-- Showcase of travel mechanisms; Seasons, Swimming, Mounts, DIMITRI CAN SWIM. -->
         </section>
     </main>
     
     <footer>
-        <p>
-            &copy; Diego Caskey 2026
-        </p>
+        <p>&copy; Diego Caskey 2026</p>
     </footer>
 
     <!-- Sound Effects Stored In "sounds" Folder -->
+    <audio id="entrySound" src="sounds/Oracle_Stairs.wav" autoplay></audio>
     <audio id="hoverSound" src="sounds/Oracle_Menu_Cursor.wav"></audio>
     <audio id="clickSound" src="sounds/Oracle_Menu_Select.wav"></audio>
 
+    <!-- JS to enable page tansition sound -->
     <script>
-        // JS for hover & select audio
+        window.addEventListener('load', () => {
+        document.getElementById('entrySound').play();
+        });
+    </script>
+
+    <!-- JS  to enable hover and click cursor sounds -->
+    <script>
         const hoverSound = document.getElementById('hoverSound');
         const clickSound = document.getElementById('clickSound');
         const links = document.querySelectorAll('a');
