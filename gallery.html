@@ -3,58 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta
-        name="description"
-        content="Zelda: Oracle of Seasons was released on the Gameboy Color on February 27th, 2001. This website will walk you through the manyr eason why this is an undeniable fact that cannot be disputed by any living person."
-    />
     <link rel="stylesheet" href="STYLE_index.css">
     <link rel="stylesheet" href="STYLE_gallery.css">
-    <title>Oracle of Seasons: The best Zelda game on the Gameboy Color</title>
+    <title>Oracle of Seasons: Sprite Gallery</title>
 </head>
 
 <body>
     <header>
         <img src="images/OoS_Logo.png" alt="English logo for Zelda: Oracle of Seasons" height="250px">
-        <h1>Sprite Gallery</h1>
+        <div id="navbar">
+            <a href="#reason1" class="toc selectable">1.THE INTRO</a>
+            <a href="#reason2" class="toc selectable">2.THE SPRITES</a>
+            <a href="#reason3" class="toc selectable">3.THE CHARACTERS</a>
+            <a href="#reason4" class="toc selectable">4.THE EXPLORATION</a>
+        </div>
     </header>
 
     <main>
         <div class="sprite-grid">
             <div class="sprite-card">
-                <h2>- LINK -</h2>
-                <img src="sprites/Sprites_Link.png" alt="Link spritesheet">
+                <div class="sprite-card-inner">
+                    <div class="front"><h2>- LINK -</h2></div>
+                    <div class="back"><img src="sprites/Sprites_Link.png" alt="Link spritesheet"></div>
+                </div>
             </div>
             <div class="sprite-card">
-                <h2>- ZELDA -</h2>
-                <img src="sprites/Sprites_Zelda.png" alt="Zelda spritesheet">
+                <div class="sprite-card-inner">
+                    <div class="front"><h2>- ZELDA -</h2></div>
+                    <div class="back"><img src="sprites/Sprites_Zelda.png" alt="Zelda spritesheet"></div>
+                </div>
             </div>
             <div class="sprite-card">
-                <h2>- NPCs -</h2>
-                <img src="sprites/Sprites_Traders.png" alt="Traders spritesheet">
+                <div class="sprite-card-inner">
+                    <div class="front"><h2>- NPCs -</h2></div>
+                    <div class="back"><img src="sprites/Sprites_Traders.png" alt="Traders spritesheet"></div>
+                </div>
             </div>
             <div class="sprite-card">
-                <h2>- MAPLE -</h2>
-                <img src="sprites/Sprites_Maple.png" alt="Maple spritesheet">
+                <div class="sprite-card-inner">
+                    <div class="front"><h2>- MAPLE -</h2></div>
+                    <div class="back"><img src="sprites/Sprites_Maple.png" alt="Maple spritesheet"></div>
+                </div>
             </div>
             <div class="sprite-card">
-                <h2>- RICKY -</h2>
-                <img src="sprites/Sprites_Ricky.png" alt="Ricky spritesheet">
+                <div class="sprite-card-inner">
+                    <div class="front"><h2>- RICKY -</h2></div>
+                    <div class="back"><img src="sprites/Sprites_Ricky.png" alt="Ricky spritesheet"></div>
+                </div>
             </div>
             <div class="sprite-card">
-                <h2>- DIMITRI -</h2>
-                <img src="sprites/Sprites_Dimitri.png" alt="Dimitri spritesheet">
+                <div class="sprite-card-inner">
+                    <div class="front"><h2>- DIMITRI -</h2></div>
+                    <div class="back"><img src="sprites/Sprites_Dimitri.png" alt="Dimitri spritesheet"></div>
+                </div>
             </div>
             <div class="sprite-card">
-                <h2>- MOOSH -</h2>
-                <img src="sprites/Sprites_Moosh.png" alt="Moosh spritesheet">
+                <div class="sprite-card-inner">
+                    <div class="front"><h2>- MOOSH -</h2></div>
+                    <div class="back"><img src="sprites/Sprites_Moosh.png" alt="Moosh spritesheet"></div>
+                </div>
             </div>
             <div class="sprite-card">
-                <h2>- ENEMIES -</h2>
-                <img src="sprites/Sprites_Enemies.png" alt="Enemies spritesheet">
+                <div class="sprite-card-inner">
+                    <div class="front"><h2>- ENEMIES -</h2></div>
+                    <div class="back"><img src="sprites/Sprites_Enemies.png" alt="Enemies spritesheet"></div>
+                </div>
             </div>
             <div class="sprite-card">
-                <h2>- ORACLES -</h2>
-                <img src="sprites/Sprites_Oracles.png" alt="Oracles spritesheet">
+                <div class="sprite-card-inner">
+                    <div class="front"><h2>- ORACLES -</h2></div>
+                    <div class="back"><img src="sprites/Sprites_Oracles.png" alt="Oracles spritesheet"></div>
+                </div>
             </div>
         </div>
     </main>
@@ -63,48 +82,34 @@
         <p>&copy; Diego Caskey 2026</p>
     </footer>
 
-    <!-- Sound Effects Stored In "sounds" Folder -->
     <audio id="entrySound" src="sounds/Oracle_Stairs.wav" autoplay></audio>
+    <audio id="hoverSound" src="sounds/Oracle_Text_Done.wav"></audio>
+    <audio id="cursorSound" src="sounds/Oracle_Menu_Cursor.wav"></audio>
 
-    <!-- JavasScript to enable page tansition sound -->
     <script>
+        const entrySound = document.getElementById('entrySound');
+        const hoverSound = document.getElementById('hoverSound');
+        const cursorSound = document.getElementById('cursorSound');
+        const cards = document.querySelectorAll('.sprite-card');
+        const navLinks = document.querySelectorAll('#navbar a');
+
         window.addEventListener('load', () => {
-        document.getElementById('entrySound').play();
+            entrySound.play();
         });
-    </script>
-    
-    <!-- JS for efficient column stacking -->
-    <script>
-        function masonryLayout() {
-            const grid = document.querySelector('.sprite-grid');
-            const cards = [...document.querySelectorAll('.sprite-card')];
-            const columnCount = 3;
-            const gap = 16;
-        
-            grid.style.position = 'relative';
-        
-            const columnWidth = (grid.offsetWidth - (gap * (columnCount - 1))) / columnCount;
-            const columnHeights = new Array(columnCount).fill(0);
-        
-            cards.forEach(card => {
-                card.style.position = 'absolute';
-                card.style.width = columnWidth + 'px';
-            
-                const shortestColumn = columnHeights.indexOf(Math.min(...columnHeights));
-                const x = shortestColumn * (columnWidth + gap);
-                const y = columnHeights[shortestColumn];
-            
-                card.style.left = x + 'px';
-                card.style.top = y + 'px';
-            
-                columnHeights[shortestColumn] += card.offsetHeight + gap;
-            });
-        
-            grid.style.height = Math.max(...columnHeights) + 'px';
-        }
 
-        window.addEventListener('load', masonryLayout);
-        window.addEventListener('resize', masonryLayout);
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                hoverSound.currentTime = 0;
+                hoverSound.play();
+            });
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                cursorSound.currentTime = 0;
+                cursorSound.play();
+            });
+        });
     </script>
 </body>
 </html>

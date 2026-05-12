@@ -54,6 +54,16 @@ main p {
 
 /* END GENERAL */
 
+/* BEGIN NAVBAR */
+
+#navbar {
+    background-color: rgba(151, 125, 65);
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+}
+
+/* END NAVBAR */
+
 /* BEGIN HEADER */
 
 header {
@@ -74,7 +84,6 @@ h1 {
     text-align: center;
     color: rgb(0, 0, 0);
     background-color: rgba(151, 125, 65);
-    margin-bottom: 2rem;
 }
 
 /* END HEADER */

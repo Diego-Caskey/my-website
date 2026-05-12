@@ -14,20 +14,15 @@
 <body>
     <header>
         <img src="images/OoS_Logo.png" alt="English logo for Zelda: Oracle of Seasons" height="250px">
-        <h1>The <em>best</em> Zelda game for the Gameboy Color.</h1>
-    </header>
-
-    <main>
-        <section id="tableofcontents">
-            <h2>Table of Contents :</h2>
-            <div>
+            <div id="navbar">
                 <a href="#reason1" class="toc selectable">1.THE INTRO</a>
                 <a href="#reason2" class="toc selectable">2.THE SPRITES</a>
                 <a href="#reason3" class="toc selectable">3.THE CHARACTERS</a>
                 <a href="#reason4" class="toc selectable">4.THE EXPLORATION</a>
-             </div>
-        </section>
+            </div>
+    </header>
 
+    <main>
         <section id="reason1">
             <h2>Reason 1 : The Intro</h2>
             <a href="theater.html"><img class="selectable" src="images/IntroClose.PNG" alt="Link rears a horse into the air very cool like.">
@@ -71,9 +66,9 @@
     <!-- Sound Effects Stored In "sounds" Folder -->
     <audio id="hoverSound" src="sounds/Oracle_Menu_Cursor.wav"></audio>
     <audio id="clickSound" src="sounds/Oracle_Menu_Select.wav"></audio>
-    
-    <!-- JavaScript For Hover & Select Audio Functionality -->
+
     <script>
+        // JS for hover & select audio
         const hoverSound = document.getElementById('hoverSound');
         const clickSound = document.getElementById('clickSound');
         const links = document.querySelectorAll('a');
