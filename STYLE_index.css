@@ -47,9 +47,24 @@ main p {
     100% { outline-color: rgba(153, 20, 35); }
 }
 
+@keyframes blink-menu {
+    0%   { color: rgba(255, 240, 180); }
+    50%  { color: rgba(77, 28, 134); }
+    100% { color: rgba(255, 240, 180); }
+}
+
+.selectable-menu:hover {
+    color: rgba(255, 240, 180);
+    animation: blink-menu 1.25s step-end infinite;
+}
+
 .selectable:hover {
     outline: 3px solid rgba(153, 20, 35);
     animation: blink 1.25s step-end infinite;
+}
+
+.red-text {
+    color: rgba(153, 20, 35);
 }
 
 /* END GENERAL */
@@ -61,6 +76,7 @@ main p {
     display: flex;
     align-items: center;
     gap: 1rem;
+    position: relative;
 }
 
 .nav-back {
@@ -96,29 +112,36 @@ main p {
     cursor: pointer;
     padding: 0.5rem;
     font-size: 1rem;
+    outline: none;
 }
 
 .nav-dropdown-content {
-    display: none;
     position: absolute;
     top: 100%;
     left: 0;
     background-color: rgba(151, 125, 65);
     width: max-content;
     z-index: 100;
+    display: flex;
     flex-direction: column;
-    border: 3px solid rgba(77, 28, 134);
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease;
 }
 
 .nav-dropdown:hover .nav-dropdown-content {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
+    max-height: 300px;
+    box-shadow: 0 0 0 3px rgba(77, 28, 134);
+}
+
+.nav-dropdown:hover .nav-dropdown-button {
+    outline: 3px solid rgba(77, 28, 134);
 }
 
 .nav-dropdown-content a {
     display: block;
     padding: 0.75rem 1.25rem;
+    text-align: left;
 }
 
 /* END NAVBAR */

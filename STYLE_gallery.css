@@ -84,12 +84,30 @@ h1 {
 .front h2 {
     color: wheat;
     font-family: ZeldaOracle;
-    font-size: 2rem;
+    font-size: clamp(1rem, 2vw, 2rem);
     text-align: center;
+    margin: 0;
+    padding: 0;
 }
 
 footer {
     text-align: center;
     padding-bottom: 1rem;
     font-family: ZeldaAwakening;
+}
+
+/* MOBILE EXPERIENCE BREAKPOINT */
+@media (max-width: 768px) {
+    .sprite-grid {
+        columns: 1;
+    }
+}
+
+.front h2 {
+    color: wheat;
+    font-family: ZeldaOracle;
+    font-size: clamp(1rem, 5vw, 2rem);
+    text-align: center;
+    margin: 0;
+    padding: 0;
 }

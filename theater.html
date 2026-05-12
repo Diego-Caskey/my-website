@@ -16,8 +16,13 @@
     <header>
         <img src="images/OoS_Logo.png" alt="English logo for Zelda: Oracle of Seasons" height="250px">
         <div id="navbar">
-            <a href="index.html" class="nav-back selectable">&#9664; BACK</a>
-            <span class="nav-title"><span class="red-text">A</span> = START | <span class="red-text">B</span> = BACK</span>
+            <div class="nav-dropdown">
+                <button class="nav-dropdown-button">&#9660; MENU</button>
+                <div class="nav-dropdown-content">
+                    <a href="index.html" class="toc selectable-menu">- GO BACK</a>
+                </div>
+            </div>
+            <span class="nav-title"><span class="red-text">A</span> = START INTRO | <span class="red-text">B</span> = GO BACK</span>
         </div>
     </header>
 
@@ -45,11 +50,30 @@
     <audio id="entrySound" src="sounds/Oracle_Stairs.wav" autoplay></audio>
     <audio id="aSound" src="sounds/Oracle_PauseMenu_Open.wav"></audio>
     <audio id="bSound" src="sounds/Oracle_PauseMenu_Close.wav"></audio>
+    <audio id="menuOpenSound" src="sounds/Oracle_PauseMenu_Open.wav"></audio>
+    <audio id="menuCloseSound" src="sounds/Oracle_PauseMenu_Close.wav"></audio>
 
     <!-- JavasScript to enable page tansition sound -->
     <script>
         window.addEventListener('load', () => {
         document.getElementById('entrySound').play();
+        });
+    </script>
+
+    <!-- JS to enable menu functionality -->
+    <script>
+        const menuOpenSound = document.getElementById('menuOpenSound');
+        const menuCloseSound = document.getElementById('menuCloseSound');
+        const dropdown = document.querySelector('.nav-dropdown');
+
+        dropdown.addEventListener('mouseenter', () => {
+            menuOpenSound.currentTime = 0;
+            menuOpenSound.play();
+        });
+
+        dropdown.addEventListener('mouseleave', () => {
+            menuCloseSound.currentTime = 0;
+            menuCloseSound.play();
         });
     </script>
 
