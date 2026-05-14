@@ -48,7 +48,7 @@ main {
     position: absolute;
     aspect-ratio: 1/1;
     width: 13%;
-    left: 77.65%;
+    left: 77.60%;
     bottom: 25.80%;
     cursor: pointer;
     border-radius: 50%;
@@ -59,8 +59,8 @@ main {
     position: absolute;
     aspect-ratio: 1/1;
     width: 13%;
-    left: 59.19%;
-    bottom: 23.76%;
+    left: 59.12%;
+    bottom: 23.73%;
     cursor: pointer;
     border-radius: 50%;
     background: rgba(255,0,0,0.3)

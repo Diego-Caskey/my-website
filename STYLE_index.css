@@ -201,9 +201,23 @@ a.toc {
     align-items: center;
 }
 
-#reason1 img {
-    max-height: 25rem;
-    max-width: 25rem;
+.reason1-link {
+    display: block;
+    width: 100%;
+}
+
+.reason1-parallax {
+    background-image:
+        url(images/IntroClose.PNG),
+        url(images/IntroWide.PNG),
+        url(images/IntroFar.PNG);
+    background-attachment: fixed, fixed, fixed;
+    background-repeat: repeat-y, repeat-y, repeat-y;
+    background-position: left center, center center, right center;
+    background-size: 33.33% auto, 33.33% auto, 33.33% auto;
+    image-rendering: pixelated;
+    width: 100%;
+    height: 10rem;
 }
 
 /* END REASON 1 */

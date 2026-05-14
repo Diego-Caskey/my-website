@@ -1,0 +1,12 @@
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+main img {
+    image-rendering: pixelated;
+    width: 50vw;
+    height: auto;
+}
