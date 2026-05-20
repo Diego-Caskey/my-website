@@ -1,12 +1,116 @@
 main {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-
+    gap: 2rem;
+    padding: 2rem;
 }
 
-main img {
+#tavern-screen {
+    width: 60vw;
+    aspect-ratio: 10 / 8;
+    display: grid;
+    grid-template-columns: repeat(10, minmax(0, 1fr));
+    grid-template-rows: repeat(8, minmax(0, 1fr));
+    background-image: url('gifs/TavernAllItems.gif');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
     image-rendering: pixelated;
-    width: 50vw;
-    height: auto;
+    border: 4px solid rgba(77, 28, 134);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    position: relative;
+}
+
+#link-avatar {
+    width: 200%;
+    height: 200%;
+    place-self: end center;
+    image-rendering: pixelated;
+}
+
+#dialogue-box {
+    position: absolute;
+    bottom: 5%;
+    left: 5%;
+    width: 90%;
+    height: 20%;
+    background: black;
+    color: white;
+    border: 2px solid wheat;
+    padding: 1rem;
+    font-family: ZeldaAwakening;
+    font-size: 1rem;
+    line-height: 1.4;
+    z-index: 10;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+#dialogue-box.hidden {
+    display: none;
+}
+
+#dialogue-text {
+    margin: 0;
+}
+
+#controls {
+    display: flex;
+    gap: 4rem;
+    align-items: center;
+}
+
+#dpad {
+    display: grid;
+    grid-template-columns: repeat(3, 3rem);
+    grid-template-rows: repeat(3, 3rem);
+    gap: 0.25rem;
+}
+
+.dpad-up {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.dpad-left {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.dpad-down {
+    grid-column: 2;
+    grid-row: 3;
+}
+
+.dpad-right {
+    grid-column: 3;
+    grid-row: 2;
+}
+
+#action-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.action-btn {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+}
+
+.ctrl-btn {
+    font-family: ZeldaAwakening;
+    font-weight: bold;
+    font-size: 1.25rem;
+    background: rgba(151, 125, 65);
+    color: wheat;
+    border: 3px solid rgba(77, 28, 134);
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+.ctrl-btn:active {
+    transform: scale(0.9);
+    background: rgba(77, 28, 134);
 }

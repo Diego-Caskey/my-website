@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,7 +24,25 @@
     </header>
 
     <main>
-        <img src="gifs/LinkBabyDown.gif" alt="Dimitri animated">
+        <div id="tavern-screen">
+            <img id="link-avatar" src="gifs/LinkWalkDown.gif" alt="Link avatar">
+            <div id="dialogue-box" class="hidden">
+                <p id="dialogue-text"></p>
+            </div>
+        </div>
+
+        <div id="controls">
+            <div id="dpad">
+                <button id="btnUp" class="ctrl-btn dpad-up">▲</button>
+                <button id="btnLeft" class="ctrl-btn dpad-left">◄</button>
+                <button id="btnDown" class="ctrl-btn dpad-down">▼</button>
+                <button id="btnRight" class="ctrl-btn dpad-right">►</button>
+            </div>
+            <div id="action-buttons">
+                <button id="btnB" class="ctrl-btn action-btn">B</button>
+                <button id="btnA" class="ctrl-btn action-btn">A</button>
+            </div>
+        </div>
     </main>
 
     <footer>
@@ -37,6 +56,7 @@
     <audio id="cursorSound" src="sounds/Oracle_Menu_Cursor.wav"></audio>
     <audio id="menuOpenSound" src="sounds/Oracle_PauseMenu_Open.wav"></audio>
     <audio id="menuCloseSound" src="sounds/Oracle_PauseMenu_Close.wav"></audio>
+    <audio id="bgMusic" src="sounds/WitchHut.mp3" loop autoplay></audio>
 
     <!-- JS to enable menu functionality -->
     <script>
@@ -54,5 +74,319 @@
             menuCloseSound.play();
         });
     </script>
+
+    <!-- JS to enable avatar control -->
+    <script>
+        const linkAvatar = document.getElementById('link-avatar');
+
+        const sprites = {
+            up: 'gifs/LinkWalkUp.gif',
+            down: 'gifs/LinkWalkDown.gif',
+            left: 'gifs/LinkWalkLeft.gif',
+            right: 'gifs/LinkWalkRight.gif'
+        };
+
+        const pushSprites = {
+            up: 'gifs/LinkPushUp.gif',
+            down: 'gifs/LinkPushDown.gif',
+            left: 'gifs/LinkPushLeft.gif',
+            right: 'gifs/LinkPushRight.gif'
+        };
+
+        const babySprites = {
+            up: 'gifs/LinkBabyUp.gif',
+            down: 'gifs/LinkBabyDown.gif',
+            left: 'gifs/LinkBabyLeft.gif',
+            right: 'gifs/LinkBabyRight.gif'
+        };
+
+        const itemFanfare = new Audio('sounds/Oracle_Fanfare_Item.wav');
+        const fanfareEssence = new Audio('sounds/Oracle_Fanfare_Essence.wav');
+        const appearVanish = new Audio('sounds/Oracle_AppearVanish.wav');
+
+        const GRID_W = 10;
+        const GRID_H = 8;
+        const PUSH_DURATION = 500;   // ms — adjust to match your gif length
+
+        const MAP = [
+            '##########',  // A
+            '##########',  // B
+            '#......##.',  // C
+            '#.###.####',  // D
+            '#.#.....##',  // E
+            '#.##.....#',  // F
+            '#.....##.#',  // G
+            '##########'   // H
+        ];
+
+        const state = {
+            x: 6,
+            y: 6,
+            facing: 'down',
+            pushing: false,
+            isBaby: false,
+            itemHeld: null,
+            bushSearched: false,
+            gotSoup: false,
+            gotFlute: false,
+            fainted: false
+        };
+
+        let pushTimer = null;
+        let itemTimer = null;
+        let dialogueTimer = null;
+
+        // Centralized item-display: shows a sprite for `duration` ms,
+        // and cancels any previous pending item cleanup so timers can't conflict
+        function showItem(filename, duration) {
+            clearTimeout(itemTimer);
+            state.itemHeld = filename;
+            render();
+            itemTimer = setTimeout(() => {
+                if (state.itemHeld === filename) {
+                    state.itemHeld = null;
+                    render();
+                }
+            }, duration);
+        }
+
+        // Dialogue box: shows white text on black for `duration` ms,
+        // and cancels any previous pending dialogue so timers can't conflict
+        const dialogueBox = document.getElementById('dialogue-box');
+        const dialogueText = document.getElementById('dialogue-text');
+
+        function showDialogue(text, duration = 3000) {
+            clearTimeout(dialogueTimer);
+            dialogueText.textContent = text;
+            dialogueBox.classList.remove('hidden');
+            dialogueTimer = setTimeout(() => {
+                dialogueBox.classList.add('hidden');
+            }, duration);
+        }
+
+        function isBlocked(x, y) {
+            if (x < 1 || x > GRID_W || y < 1 || y > GRID_H) return true;
+            if (state.isBaby && x === 8 && y === 7) return false;
+            return MAP[y - 1][x - 1] === '#';
+        }
+
+        function render() {
+            linkAvatar.style.gridColumn = state.x;
+            linkAvatar.style.gridRow = state.y;
+
+            let src;
+            if (state.itemHeld) {
+                src = state.itemHeld;
+            } else if (state.fainted) {
+                src = 'gifs/LinkFaint.png';
+            } else if (state.isBaby) {
+                src = babySprites[state.facing];
+            } else if (state.pushing) {
+                src = pushSprites[state.facing];
+            } else {
+                src = sprites[state.facing];
+            }
+            linkAvatar.src = src;
+        }
+
+        function move(direction) {
+            if (state.fainted) return;
+            state.facing = direction;
+            let newX = state.x;
+            let newY = state.y;
+            if (direction === 'up') newY--;
+            if (direction === 'down') newY++;
+            if (direction === 'left') newX--;
+            if (direction === 'right') newX++;
+
+            if (isBlocked(newX, newY)) {
+                state.pushing = true;
+                clearTimeout(pushTimer);
+                pushTimer = setTimeout(() => {
+                    state.pushing = false;
+                    render();
+                }, PUSH_DURATION);
+            } else {
+                state.x = newX;
+                state.y = newY;
+                state.pushing = false;
+                clearTimeout(pushTimer);
+            }
+            render();
+        }
+
+        const tavernScreen = document.getElementById('tavern-screen');
+
+        const events = {
+            '2,2': searchBush,
+            '8,3': talkToWitchC,
+            '4,4': talkToDimitri,
+            '5,4': talkToDimitri,
+            '8,4': talkToWitchD,
+            '9,5': talkToMaple,
+            '3,6': eatSoup,
+            '4,6': talkToZelda,
+            '7,7': talkToSleepingMan,
+            '8,7': drinkPotion
+        };
+
+        function setBackground(filename) {
+            tavernScreen.style.backgroundImage = `url('gifs/${filename}')`;
+        }
+
+        // Event placeholders — fill in later
+        function searchBush() {
+            if (state.isBaby) return;
+            if (state.bushSearched) return;
+            state.bushSearched = true;
+            itemFanfare.currentTime = 0;
+            itemFanfare.play();
+            showItem('gifs/LinkGetMushroom.png', 1500);
+        }
+
+        function talkToWitchC() {
+            // Baby Link can still chat with the witch
+            if (state.isBaby) {
+                showDialogue("Oh my, a little one! Are you lost, dear?");
+                return;
+            }
+            // Already has soup — flavor line
+            if (state.gotSoup) {
+                showDialogue("Now hurry that soup over to Dimitri!");
+                return;
+            }
+            // Hasn't found the mushroom yet
+            if (!state.bushSearched) {
+                showDialogue("No mushroom, no soup. Check the bushes outside, dear.");
+                return;
+            }
+            // First time delivering the mushroom — give soup
+            state.gotSoup = true;
+            itemFanfare.currentTime = 0;
+            itemFanfare.play();
+            showItem('gifs/LinkGetSoup.png', 1500);
+            showDialogue("Ah, the mushroom! Here's some soup for Dimitri.");
+        }
+
+        function talkToWitchD() {
+            talkToWitchC();
+        }
+
+        function talkToDimitri() {
+            // Baby Link can chat with Dimitri
+            if (state.isBaby) {
+                showDialogue("Coo? Did you shrink, little hero?");
+                return;
+            }
+            // Already healed — flavor line
+            if (state.gotFlute) {
+                showDialogue("Coo coo! Thanks again for the soup, friend.");
+                return;
+            }
+            // No soup yet
+            if (!state.gotSoup) {
+                showDialogue("Coo... I don't feel well... I need the witch's soup...");
+                return;
+            }
+
+            // First time delivering the soup — heal Dimitri and give flute
+            state.gotFlute = true;
+
+            // Cancel any pending item cleanup from prior pickups
+            clearTimeout(itemTimer);
+            state.itemHeld = null;
+            render();
+
+            setBackground('TavernEatSoup.gif');
+
+            setTimeout(() => {
+                setBackground('TavernDimitriHealed.gif');
+                fanfareEssence.currentTime = 0;
+                fanfareEssence.play();
+                showItem('gifs/LinkGetFlute.png', 2500);
+                showDialogue("Coo! All better! Take this flute as my thanks.");
+            }, 3000);
+        }
+
+        function talkToMaple() {
+            if (state.isBaby) {
+                showDialogue("Hey shrimp! Out of my way, I'm in a hurry!");
+                return;
+            }
+            showDialogue("One day I'll be a great witch like Grandma Maple!");
+        }
+
+        function eatSoup() {
+            if (state.isBaby) return;
+            if (state.fainted) return;
+            setBackground('TavernNoSoup.gif');
+            clearTimeout(itemTimer);
+            state.itemHeld = 'gifs/LinkFaint.gif';
+            render();
+            setTimeout(() => {
+                state.itemHeld = null;
+                state.fainted = true;
+                render();
+            }, 2000);
+        }
+
+        function talkToZelda() {
+            // Baby Link reaction takes priority over quest state
+            if (state.isBaby) {
+                showDialogue("Link?! What happened to you?! Oh my goodness!");
+                return;
+            }
+            // After Dimitri is healed
+            if (state.gotFlute) {
+                showDialogue("You're a true hero, Link. Thank you.");
+                return;
+            }
+            // Default: hint about Dimitri
+            showDialogue("Dimitri looks ill... perhaps the witch can help him?");
+        }
+
+        function talkToSleepingMan() {
+            showDialogue("Zzz... five more minutes... zzz...");
+        }
+
+        function drinkPotion() {
+            setBackground('TavernNoPotion.gif');
+            state.isBaby = true;
+            state.itemHeld = null;
+            appearVanish.currentTime = 0;
+            appearVanish.play();
+            render();
+        }
+
+        document.getElementById('btnUp').addEventListener('click', () => move('up'));
+        document.getElementById('btnDown').addEventListener('click', () => move('down'));
+        document.getElementById('btnLeft').addEventListener('click', () => move('left'));
+        document.getElementById('btnRight').addEventListener('click', () => move('right'));
+
+        document.getElementById('btnA').addEventListener('click', () => {
+            let tx = state.x;
+            let ty = state.y;
+            if (state.facing === 'up') ty--;
+            if (state.facing === 'down') ty++;
+            if (state.facing === 'left') tx--;
+            if (state.facing === 'right') tx++;
+            const event = events[`${tx},${ty}`];
+            if (event) event();
+        });
+
+        document.getElementById('btnB').addEventListener('click', () => { });
+
+        render();
+    </script>
+
+    <!-- JS to enable background music -->
+    <script>
+        const bgMusic = document.getElementById('bgMusic');
+        bgMusic.volume = 0.5;
+        document.addEventListener('click', () => {
+            if (bgMusic.paused) bgMusic.play();
+        }, { once: true });
+    </script>
 </body>
+
 </html>
