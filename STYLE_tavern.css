@@ -31,29 +31,57 @@ main {
 
 #dialogue-box {
     position: absolute;
-    bottom: 5%;
     left: 5%;
     width: 90%;
-    height: 20%;
+    height: 25%;
     background: black;
     color: white;
-    border: 2px solid wheat;
-    padding: 1rem;
+    padding: 0.5rem 1rem;
     font-family: ZeldaAwakening;
-    font-size: 1rem;
     line-height: 1.4;
     z-index: 10;
-    overflow: hidden;
     pointer-events: none;
-}
-
-#dialogue-box.hidden {
-    display: none;
+    overflow: hidden;
+    align-items: center;
+    place-items: center start;
+    justify-content: flex-start;
 }
 
 #dialogue-text {
+    align-self: center;
+    font-size: 1.5rem;
+    color: white;
     margin: 0;
+    text-align: left;
+    white-space: pre-wrap;
 }
+
+#dialogue-box.bottom { bottom: 5%; }
+#dialogue-box.top    { top: 5%; }
+#dialogue-box.hidden { display: none; }
+
+.dialogue-red {
+    color: rgb(255, 90, 90);
+}
+
+#yn-picker {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 1rem;
+    background: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    font-family: ZeldaAwakening;
+    font-size: 1.5rem;
+    display: flex;
+    gap: 1.5rem;
+    width: auto;
+    height: auto;
+    flex-shrink: 0;
+    z-index: 11;
+}
+#yn-picker.hidden { display: none; }
+.yn-option.selected { color: rgb(255, 90, 90); }
 
 #controls {
     display: flex;
@@ -68,25 +96,10 @@ main {
     gap: 0.25rem;
 }
 
-.dpad-up {
-    grid-column: 2;
-    grid-row: 1;
-}
-
-.dpad-left {
-    grid-column: 1;
-    grid-row: 2;
-}
-
-.dpad-down {
-    grid-column: 2;
-    grid-row: 3;
-}
-
-.dpad-right {
-    grid-column: 3;
-    grid-row: 2;
-}
+.dpad-up    { grid-column: 2; grid-row: 1; }
+.dpad-left  { grid-column: 1; grid-row: 2; }
+.dpad-down  { grid-column: 2; grid-row: 3; }
+.dpad-right { grid-column: 3; grid-row: 2; }
 
 #action-buttons {
     display: flex;
