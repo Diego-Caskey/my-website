@@ -164,6 +164,7 @@ header {
     background-size: cover;
     background-position: center;
     margin-bottom: 2rem;
+    image-rendering: pixelated;
 }
 
 header img {
