@@ -1,3 +1,18 @@
+/* BEGIN FONT SIZE VARIABLES — change these to tune all text sizes site-wide */
+:root {
+    /* Page-level text (scales with viewport via clamp) */
+    --font-h2: clamp(1.5rem, 4vw, 2.5rem);
+    --font-body: clamp(0.875rem, 1.5vw, 1rem);
+    --font-nav: clamp(0.75rem, 1.5vw, 1rem);
+    --font-nav-title: clamp(0.75rem, 1.5vw, 1rem);
+
+    /* Banner-level text (scales with banner width via cqi) */
+    --font-gacha-name: 6cqi;
+    --font-gacha-tag: 2.5cqi;
+}
+
+/* END FONT SIZE VARIABLES */
+
 /* BEGIN GENERAL */
 * {
     box-sizing: border-box;
@@ -7,7 +22,7 @@
 }
 
 body {
-    background-color:wheat
+    background-color: wheat
 }
 
 section {
@@ -17,9 +32,23 @@ section {
 main h2 {
     font-family: ZeldaOracle;
     text-align: center;
+    margin-left: 3rem;
+    margin-right: 3rem;
     margin-bottom: 1.5rem;
-    font-size: 2.5rem;
+    font-size: var(--font-h2);
     color: rgba(153, 20, 35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+main h2::before,
+main h2::after {
+    content: "";
+    flex: 1;
+    height: 5px;
+    background-color: rgba(153, 20, 35);
 }
 
 main p {
@@ -28,7 +57,7 @@ main p {
     padding-top: 1rem;
     padding-left: 3rem;
     padding-right: 3rem;
-    font-size: 1rem;
+    font-size: var(--font-body);
     color: rgb(0, 0, 0);
 }
 
@@ -43,15 +72,31 @@ main p {
 }
 
 @keyframes blink {
-    0%   { outline-color: rgba(153, 20, 35); }
-    50%  { outline-color: transparent; }
-    100% { outline-color: rgba(153, 20, 35); }
+    0% {
+        outline-color: rgba(153, 20, 35);
+    }
+
+    50% {
+        outline-color: transparent;
+    }
+
+    100% {
+        outline-color: rgba(153, 20, 35);
+    }
 }
 
 @keyframes blink-menu {
-    0%   { color: rgba(255, 240, 180); }
-    50%  { color: rgba(77, 28, 134); }
-    100% { color: rgba(255, 240, 180); }
+    0% {
+        color: rgba(255, 240, 180);
+    }
+
+    50% {
+        color: rgba(77, 28, 134);
+    }
+
+    100% {
+        color: rgba(255, 240, 180);
+    }
 }
 
 .selectable-menu:hover {
@@ -105,6 +150,7 @@ main p {
     left: 50%;
     transform: translateX(-50%);
     pointer-events: none;
+    font-size: var(--font-nav-title);
 }
 
 .nav-dropdown {
@@ -120,7 +166,7 @@ main p {
     border: none;
     cursor: pointer;
     padding: 0.5rem;
-    font-size: 1rem;
+    font-size: var(--font-nav);
     outline: none;
 }
 
@@ -171,6 +217,10 @@ header img {
     margin-top: 2rem;
     margin-bottom: 2rem;
     filter: drop-shadow(0px 0px 20px rgba(255, 255, 255, 0.8));
+    max-width: 100%;
+    max-height: 250px;
+    height: auto;
+    width: auto;
 }
 
 h1 {
@@ -208,7 +258,6 @@ a.toc {
 #reason1 {
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
 .reason1-link {
@@ -257,8 +306,13 @@ a.toc {
 }
 
 @keyframes conveyor {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
 }
 
 #reason2 a {
@@ -289,6 +343,7 @@ a.toc {
     display: flex;
     align-items: center;
     overflow: hidden;
+    container-type: inline-size;
 }
 
 .gacha-slide img {
@@ -314,7 +369,7 @@ a.toc {
 
 .gacha-tag {
     font-family: ZeldaAwakening;
-    font-size: 1.75rem;
+    font-size: var(--font-gacha-tag);
     letter-spacing: 0.2rem;
     flex: 1;
     display: flex;
@@ -333,7 +388,7 @@ a.toc {
 
 .gacha-name {
     font-family: ZeldaOracle;
-    font-size: 3.5rem;
+    font-size: var(--font-gacha-name);
     text-align: left;
     padding-left: 5%;
     padding-right: 1rem;
@@ -352,10 +407,26 @@ a.toc {
 }
 
 @keyframes gacha-cycle {
-    0%,   22%  { transform: translateX(0); }
-    27%,  47%  { transform: translateX(-25%); }
-    53%,  72%  { transform: translateX(-50%); }
-    78%, 100%  { transform: translateX(-75%); }
+
+    0%,
+    22% {
+        transform: translateX(0);
+    }
+
+    27%,
+    47% {
+        transform: translateX(-25%);
+    }
+
+    53%,
+    72% {
+        transform: translateX(-50%);
+    }
+
+    78%,
+    100% {
+        transform: translateX(-75%);
+    }
 }
 
 /* END REASON 3 */
@@ -367,3 +438,105 @@ footer {
 }
 
 /* END FOOTER */
+
+/* BEGIN MOBILE MEDIA QUERY */
+@media (max-width: 700px) {
+
+    header img {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        filter: drop-shadow(0px 0px 20px rgba(255, 255, 255, 0.8));
+        max-width: 75%;
+        max-height: 75%;
+        height: auto;
+        width: auto;
+    }
+
+    /* Override font size variables for mobile */
+    :root {
+        --font-gacha-name: 11cqi;
+        --font-gacha-tag: 4cqi;
+    }
+
+    /* Navbar — fit title on one line, shrink menu button */
+    .nav-dropdown-button {
+        padding: 0.25rem;
+    }
+
+    .nav-title {
+        white-space: nowrap;
+    }
+
+    /* Reason banners — taller aspect ratio for mobile */
+    .reason-banner {
+        aspect-ratio: 3 / 1;
+    }
+
+    /* Reason 3 (gacha) — mobile */
+    .gacha-slide {
+        height: 100%;
+    }
+
+    .gacha-slide img {
+        position: relative;
+        right: auto;
+        bottom: auto;
+        width: 65%;
+        height: 100%;
+        aspect-ratio: auto;
+        object-fit: contain;
+        object-position: right center;
+        scale: 105%;
+    }
+
+    .gacha-text {
+        width: 35%;
+        height: 100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 0.25rem;
+        padding-left: 5%;
+    }
+
+    .gacha-name {
+        padding-left: 0;
+        padding-right: 0;
+        position: relative;
+        padding-bottom: 0.15rem;
+        align-self: flex-start;
+    }
+
+    .gacha-tag {
+        letter-spacing: 0.1rem;
+        gap: 0.4rem;
+        flex: 0;
+        align-self: flex-start;
+    }
+
+    .gacha-tag::before,
+    .gacha-tag::after {
+        display: none;
+    }
+
+    .gacha-name::after {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 2px;
+        background-color: wheat;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        margin-top: 0.25rem;
+    }
+
+    /* Reason 2 (sprites) — full height, no zoom */
+    .sprite-track img {
+        height: 100%;
+        zoom: unset;
+    }
+
+    .sprite-banner {
+        display: flex;
+        align-items: center;
+    }
+}
