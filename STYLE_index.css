@@ -431,6 +431,263 @@ a.toc {
 
 /* END REASON 3 */
 
+/* BEGIN REASON 4 */
+
+.reason4-link {
+    display: block;
+    width: 100%;
+}
+
+.seasons-parallax {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.season-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center top;
+    image-rendering: pixelated;
+    opacity: 0;
+    animation: season-cycle 24s linear infinite;
+}
+
+.season-spring {
+    background-image: url('images/Overworld_Spring.png');
+    animation-delay: 0s;
+}
+
+.season-summer {
+    background-image: url('images/Overworld_Summer.png');
+    animation-delay: 6s;
+}
+
+.season-fall {
+    background-image: url('images/Overworld_Fall.png');
+    animation-delay: 12s;
+}
+
+.season-winter {
+    background-image: url('images/Overworld_Winter.png');
+    animation-delay: 18s;
+}
+
+@keyframes season-cycle {
+    0%   { opacity: 0; }
+    5%   { opacity: 1; }
+    25%  { opacity: 1; }
+    30%  { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+/* END REASON 4 */
+
+/* BEGIN PROJECTS (CAROUSEL) */
+
+#projects {
+    padding: 0;
+    margin-bottom: 4rem;
+    width: 100%;
+}
+
+.carousel {
+    position: relative;
+    width: 100%;
+    height: 50vh;
+    overflow: hidden;
+    perspective: 1200px;
+}
+
+.carousel-track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+
+.cartridge-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 25%;
+    aspect-ratio: 1 / 1;
+    transform: translate(-50%, -50%);
+    transition: transform 0.5s ease, opacity 0.5s ease, filter 0.5s ease;
+    text-decoration: none;
+    pointer-events: none;
+    z-index: 1;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+}
+
+.cartridge-card.active {
+    transform: translate(-50%, -50%) scale(1);
+    z-index: 5;
+    pointer-events: auto;
+}
+
+.cartridge-card.adjacent-left {
+    transform: translate(calc(-50% - 25vw), -50%) scale(0.65);
+    z-index: 4;
+    opacity: 0.7;
+    filter: blur(1px);
+}
+
+.cartridge-card.adjacent-right {
+    transform: translate(calc(-50% + 25vw), -50%) scale(0.65);
+    z-index: 4;
+    opacity: 0.7;
+    filter: blur(1px);
+}
+
+.cartridge-card.far-left {
+    transform: translate(calc(-50% - 45vw), -50%) scale(0.4);
+    z-index: 3;
+    opacity: 0.4;
+    filter: blur(2px);
+}
+
+
+.cartridge-card.far-right {
+    transform: translate(calc(-50% + 45vw), -50%) scale(0.4);
+    z-index: 3;
+    opacity: 0.4;
+    filter: blur(2px);
+}
+
+.cartridge-card.hidden {
+    opacity: 0;
+}
+
+/* Directional wipe animations for wrapping cards.
+   Higher specificity to override the position-class mask defaults. */
+.cartridge-card.wipe-out-left {
+    animation: wipeOutLeft 0.4s linear forwards;
+}
+
+.cartridge-card.wipe-out-right {
+    animation: wipeOutRight 0.4s linear forwards;
+}
+
+.cartridge-card.wipe-in-left {
+    animation: wipeInLeft 0.4s linear forwards;
+}
+
+.cartridge-card.wipe-in-right {
+    animation: wipeInRight 0.4s linear forwards;
+}
+
+@keyframes wipeOutLeft {
+    from {
+        -webkit-mask-image: linear-gradient(to left, transparent 0%, transparent 0%, black 0%, black 100%);
+        mask-image: linear-gradient(to left, transparent 0%, transparent 0%, black 0%, black 100%);
+    }
+    to {
+        -webkit-mask-image: linear-gradient(to left, transparent 0%, transparent 100%, black 100%, black 100%);
+        mask-image: linear-gradient(to left, transparent 0%, transparent 100%, black 100%, black 100%);
+    }
+}
+
+@keyframes wipeOutRight {
+    from {
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 0%, black 0%, black 100%);
+        mask-image: linear-gradient(to right, transparent 0%, transparent 0%, black 0%, black 100%);
+    }
+    to {
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 100%, black 100%, black 100%);
+        mask-image: linear-gradient(to right, transparent 0%, transparent 100%, black 100%, black 100%);
+    }
+}
+
+@keyframes wipeInLeft {
+    from {
+        -webkit-mask-image: linear-gradient(to left, transparent 0%, transparent 100%, black 100%, black 100%);
+        mask-image: linear-gradient(to left, transparent 0%, transparent 100%, black 100%, black 100%);
+    }
+    to {
+        -webkit-mask-image: linear-gradient(to left, transparent 0%, transparent 0%, black 0%, black 100%);
+        mask-image: linear-gradient(to left, transparent 0%, transparent 0%, black 0%, black 100%);
+    }
+}
+
+@keyframes wipeInRight {
+    from {
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 100%, black 100%, black 100%);
+        mask-image: linear-gradient(to right, transparent 0%, transparent 100%, black 100%, black 100%);
+    }
+    to {
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 0%, black 0%, black 100%);
+        mask-image: linear-gradient(to right, transparent 0%, transparent 0%, black 0%, black 100%);
+    }
+}
+
+.cartridge-frame {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background-image: url('images/Frame_Cartridge.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    image-rendering: pixelated;
+    position: relative;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+}
+
+.cartridge-card.active .cartridge-frame {
+    filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.5));
+}
+
+.cartridge-cover {
+    position: absolute;
+    top: 54.73%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(57.5%);
+    width: 70%;
+    aspect-ratio: 42 / 37;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+}
+
+.cartridge-title {
+    font-family: ZeldaOracle;
+    font-size: var(--font-body);
+    color: rgba(153, 20, 35);
+    margin-top: 1rem;
+    text-align: center;
+    padding: 0 !important;
+}
+
+.carousel-zone {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 40%;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.carousel-zone-left {
+    left: 0;
+}
+
+.carousel-zone-right {
+    right: 0;
+}
+
+/* END PROJECTS (CAROUSEL) */
+
 /* BEGIN FOOTER */
 
 footer {

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Zelda: Oracle of Seasons was released on the Gameboy Color on February 27th, 2001. This website will walk you through the manyr eason why this is an undeniable fact that cannot be disputed by any living person." />
+        content="Zelda: Oracle of Seasons was released on the Gameboy Color on February 27th, 2001. This website will walk you through the many reasons why this is an undeniable fact that cannot be disputed by any living person." />
     <link rel="stylesheet" href="STYLE_index.css">
     <link rel="icon" type="image/gifs" href="gifs/LinkGetSoup.png">
     <title>Oracle of Seasons: The best Zelda game on the Gameboy Color</title>
@@ -114,8 +114,13 @@
 
         <section id="reason4">
             <h2>Reason 4 : The Exploration</h2>
-            <a href="tavern.html" class="selectable reason-banner">
-                <img src="gifs/TavernBackground.png" alt="An empty tavern">
+            <a href="switcher.html" class="selectable reason-banner reason4-link">
+                <div class="seasons-parallax">
+                    <div class="season-layer season-spring"></div>
+                    <div class="season-layer season-summer"></div>
+                    <div class="season-layer season-fall"></div>
+                    <div class="season-layer season-winter"></div>
+                </div>
             </a>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas maximus vestibulum leo eget egestas. In
                 quis mauris augue. Aenean eu turpis non eros lacinia porttitor. Vivamus nec venenatis sem. Praesent
@@ -126,6 +131,51 @@
                 convallis. Nunc a sollicitudin odio, in vehicula arcu. In tempor justo et consectetur aliquam. Praesent
                 fringilla sit amet mi et egestas. Nunc semper, lacus non gravi.
             </p>
+        </section>
+
+        <section id="projects">
+            <h2>Extra Projects</h2>
+            <div class="carousel" id="carousel">
+                <div class="carousel-track" id="carouselTrack">
+                    <a href="tavern.html" class="cartridge-card">
+                        <div class="cartridge-frame">
+                            <div class="cartridge-cover" style="background-image: url('images/Scene_ForestSummer.png');">
+                            </div>
+                        </div>
+                        <p class="cartridge-title">Dimitri's Crisis</p>
+                    </a>
+                    <a href="battle.html" class="cartridge-card">
+                        <div class="cartridge-frame">
+                            <div class="cartridge-cover" style="background-image: url('images/Scene_Forestsummer.png');">
+                            </div>
+                        </div>
+                        <p class="cartridge-title">Turn Based RPG</p>
+                    </a>
+                    <a href="[PLACEHOLDER]" class="cartridge-card">
+                        <div class="cartridge-frame">
+                            <div class="cartridge-cover" style="background-image: url('images/Scene_ForestSpring.png');">
+                            </div>
+                        </div>
+                        <p class="cartridge-title">[PLACEHOLDER]</p>
+                    </a>
+                    <a href="[PLACEHOLDER]" class="cartridge-card">
+                        <div class="cartridge-frame">
+                            <div class="cartridge-cover" style="background-image: url('images/Scene_ForestFall.png');">
+                            </div>
+                        </div>
+                        <p class="cartridge-title">[PLACEHOLDER]</p>
+                    </a>
+                    <a href="[PLACEHOLDER]" class="cartridge-card">
+                        <div class="cartridge-frame">
+                            <div class="cartridge-cover" style="background-image: url('images/Scene_ForestWinter.png');">
+                            </div>
+                        </div>
+                        <p class="cartridge-title">[PLACEHOLDER]</p>
+                    </a>
+                </div>
+                <div class="carousel-zone carousel-zone-left" id="carouselLeft"></div>
+                <div class="carousel-zone carousel-zone-right" id="carouselRight"></div>
+            </div>
         </section>
     </main>
 
@@ -173,6 +223,105 @@
                 clickSound.play();
             });
         });
+    </script>
+
+    <!-- JS to enable carousel functionality -->
+    <script>
+        const carouselTrack = document.getElementById('carouselTrack');
+        const carouselLeft = document.getElementById('carouselLeft');
+        const carouselRight = document.getElementById('carouselRight');
+        const cards = carouselTrack.querySelectorAll('.cartridge-card');
+        let activeIndex = 0;
+        let rotationDirection = 0;
+
+        function setPositionClass(card, offset) {
+            card.classList.remove('active', 'adjacent-left', 'adjacent-right', 'far-left', 'far-right', 'hidden');
+            if (offset === 0) card.classList.add('active');
+            else if (offset === -1) card.classList.add('adjacent-left');
+            else if (offset === 1) card.classList.add('adjacent-right');
+            else if (offset === -2) card.classList.add('far-left');
+            else if (offset === 2) card.classList.add('far-right');
+            else card.classList.add('hidden');
+        }
+
+        function updateCarousel() {
+            cards.forEach((card, idx) => {
+                let offset = idx - activeIndex;
+                const half = Math.floor(cards.length / 2);
+                if (offset > half) offset -= cards.length;
+                if (offset < -half) offset += cards.length;
+
+                const prevOffset = parseInt(card.dataset.offset || '999', 10);
+                const distance = Math.abs(offset - prevOffset);
+                const isWrapping = distance > 2 && prevOffset !== 999;
+
+                // Clear any previous wipe classes
+                card.classList.remove('wipe-out-left', 'wipe-out-right', 'wipe-in-left', 'wipe-in-right');
+                // Clear any inline mask styles from previous animations
+                card.style.webkitMaskImage = '';
+                card.style.maskImage = '';
+
+                if (isWrapping) {
+                    const isAppearing = (rotationDirection === 1 && offset === 2) ||
+                                        (rotationDirection === -1 && offset === -2);
+
+                    if (isAppearing) {
+                        // Snap card to new position FIRST (no transition), then play wipe-in
+                        card.style.transition = 'none';
+                        setPositionClass(card, offset);
+                        card.offsetWidth; // force reflow
+                        card.style.transition = '';
+
+                        // Play the wipe-in animation
+                        requestAnimationFrame(() => {
+                            if (rotationDirection === 1) {
+                                card.classList.add('wipe-in-left');
+                            } else {
+                                card.classList.add('wipe-in-right');
+                            }
+                        });
+                    } else {
+                        // Keep the card at its current visual position (don't change class yet)
+                        // Apply wipe-out at current position
+                        if (rotationDirection === 1) {
+                            card.classList.add('wipe-out-left');
+                        } else {
+                            card.classList.add('wipe-out-right');
+                        }
+
+                        // After the wipe-out completes, snap to wrapped position invisibly
+                        setTimeout(() => {
+                            card.classList.remove('wipe-out-left', 'wipe-out-right');
+                            card.style.transition = 'none';
+                            setPositionClass(card, offset);
+                            card.offsetWidth; // force reflow
+                            card.style.transition = '';
+                        }, 400);
+                    }
+                } else {
+                    setPositionClass(card, offset);
+                }
+
+                card.dataset.offset = offset;
+            });
+        }
+
+        function rotateLeft() {
+            rotationDirection = -1;
+            activeIndex = (activeIndex - 1 + cards.length) % cards.length;
+            updateCarousel();
+        }
+
+        function rotateRight() {
+            rotationDirection = 1;
+            activeIndex = (activeIndex + 1) % cards.length;
+            updateCarousel();
+        }
+
+        carouselLeft.addEventListener('click', rotateLeft);
+        carouselRight.addEventListener('click', rotateRight);
+
+        updateCarousel();
     </script>
 </body>
 
