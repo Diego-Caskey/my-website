@@ -1,0 +1,60 @@
+#battle-scene {
+    margin: 0 auto;
+    width: 65vw;
+    min-width: 25rem;
+    max-width: 50rem;
+    height: auto;
+    aspect-ratio: 10/8;
+    background-size: 100% 100%;
+    image-rendering: pixelated;
+    position: relative;
+    background-image: url('images/Scene_ForestWinter.png');
+    display: grid;
+    grid-template-columns: repeat(10, minmax(0, 1fr));
+    grid-template-rows: repeat(8, minmax(0, 1fr));
+    grid-template-areas:
+        ". . . . . . . . . ."
+        ". . . . . . . . . ."
+        ". . D . . . . m1 . ."
+        ". . . . . . . . . ."
+        ". . . L . . e1 . . ."
+        ". . . . . . . . . ."
+        ". . d . . . . m2 . ."
+        ". . . . . . . . . ."
+}
+
+#hero-1 {
+    grid-area: L;
+}
+
+#hero-2 {
+    grid-area: D;
+}
+
+#hero-3 {
+    grid-area: d;
+}
+
+#enemy-1 {
+    grid-area: e1;
+}
+
+#enemy-2 {
+    grid-area: m1;
+}
+
+#enemy-3 {
+    grid-area: m2;
+}
+
+.hero, .enemy, .boss {
+    width: 100%;
+    height: 100%;
+    transform: scale(1.9);
+    transform-origin: bottom center;
+    overflow: visible;
+    object-fit: contain;
+    align-self: center;
+    justify-self: center;
+    image-rendering: pixelated;
+}

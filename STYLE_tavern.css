@@ -3,14 +3,14 @@ main {
     flex-direction: column;
     align-items: center;
     gap: 2rem;
-    padding: 2rem;
     /* Scale the entire content based on viewport */
     transform-origin: top center;
 }
 
 #tavern-screen {
-    width: 1200px;
-    height: 960px;
+    width: 65vw;
+    height: auto;
+    aspect-ratio: 10/8;
     display: grid;
     grid-template-columns: repeat(10, minmax(0, 1fr));
     grid-template-rows: repeat(8, minmax(0, 1fr));
@@ -23,6 +23,7 @@ main {
     overflow: hidden;
     position: relative;
 }
+
 #link-avatar {
     width: 200%;
     height: 200%;

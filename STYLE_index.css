@@ -2,9 +2,10 @@
 :root {
     /* Page-level text (scales with viewport via clamp) */
     --font-h2: clamp(1.5rem, 4vw, 2.5rem);
-    --font-body: clamp(0.875rem, 1.5vw, 1rem);
+    --font-body: clamp(0.875rem, 5vw, 1rem);
     --font-nav: clamp(0.75rem, 1.5vw, 1rem);
     --font-nav-title: clamp(0.75rem, 1.5vw, 1rem);
+    --font-project-name: clamp(0.1rem, 5vw, 1rem);
 
     /* Banner-level text (scales with banner width via cqi) */
     --font-gacha-name: 6cqi;
@@ -490,7 +491,7 @@ a.toc {
 
 /* END REASON 4 */
 
-/* BEGIN PROJECTS (CAROUSEL) */
+/* BEGIN PROJECTS */
 
 #projects {
     padding: 0;
@@ -502,7 +503,8 @@ a.toc {
     position: relative;
     width: 100%;
     height: 50vh;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: visible;
     perspective: 1200px;
 }
 
@@ -640,6 +642,7 @@ a.toc {
     background-position: center;
     image-rendering: pixelated;
     position: relative;
+    margin-bottom: -1rem;
     filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
 }
 
@@ -662,9 +665,9 @@ a.toc {
 
 .cartridge-title {
     font-family: ZeldaOracle;
-    font-size: var(--font-body);
+    font-weight: bold;
+    font-size: var(--font-project-name);
     color: rgba(153, 20, 35);
-    margin-top: 1rem;
     text-align: center;
     padding: 0 !important;
 }
@@ -686,7 +689,7 @@ a.toc {
     right: 0;
 }
 
-/* END PROJECTS (CAROUSEL) */
+/* END PROJECTS */
 
 /* BEGIN FOOTER */
 

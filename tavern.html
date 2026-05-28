@@ -870,24 +870,6 @@
         render();
     </script>
 
-    <!-- RESPONSIVE SCALING -->
-    <script>
-        const mainEl = document.querySelector('main');
-        const DESIGN_WIDTH = 1300; // tavern (1200) + a bit of breathing room for padding
-
-        function fitMainToViewport() {
-            const availableWidth = window.innerWidth;
-            const availableHeight = window.innerHeight - 200; // reserve room for header/footer
-            const scaleByWidth = availableWidth / DESIGN_WIDTH;
-            const scaleByHeight = availableHeight / 1400; // approximate content height (tavern + controls)
-            const scale = Math.min(scaleByWidth, scaleByHeight, 1); // never scale above 1
-            mainEl.style.transform = `scale(${scale})`;
-        }
-
-        window.addEventListener('resize', fitMainToViewport);
-        fitMainToViewport();
-    </script>
-
     <!-- JS to enable background music -->
     <script>
         const bgMusic = document.getElementById('bgMusic');
