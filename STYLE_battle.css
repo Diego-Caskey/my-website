@@ -25,6 +25,7 @@
 
 #hero-1 {
     grid-area: L;
+    position: relative;
 }
 
 #hero-2 {
@@ -57,4 +58,13 @@
     align-self: center;
     justify-self: center;
     image-rendering: pixelated;
+}
+
+.hp-bar {
+    position: absolute;
+    width: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+    image-rendering: pixelated;
+    color: lime;
 }

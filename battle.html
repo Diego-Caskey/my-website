@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,12 +25,32 @@
 
     <main>
         <div id="battle-scene">
-            <img id="hero-1" class="hero" src="gifs/LinkWalkRight.gif" alt="Link">
+            <div id="hero-1">
+                <img id="h1-sprite" class="hero" src="gifs/LinkWalkRight.gif" alt="Link">
+                <div class="hp-bar"></div>
+                <div class="turn-menu">
+                    <div id="menu-lvl-start" class="menu-lvl">
+                        <button class="attack selected" data-value="atk">ATTACK</button>
+                        <button class="skill" data-value="skl">SKILL</button>
+                    </div>
+                    <div id="menu-lvl-atk" class="menu-lvl">
+                        <button id="attack-b" class="atk-option" data-value="back">&#9664;</button>
+                        <button id="attack-1" class="atk-option selected" data-value="atk1">SLASH</button>
+                        <button id="attack-2" class="atk-option" data-value="atk2">STAB</button>
+                    </div>
+                    <div id="menu-lvl-skl" class="menu-lvl">
+                        <button id="skill-b" class="skl-option" data-value="back">&#9664;</button>
+                        <button id="skill-1" class="skl-option selected" data-value="skl1">SPIN ATTACK</button>
+                        <button id="skill-2" class="skl-option" data-value="skl2">PLAY FLUTE</button>
+                    </div>
+                </div>
+            </div>
             <img id="hero-2" class="hero" src="gifs/DimitriWalkRight.gif" alt="Dimitri">
-            <img id="hero-3" class="hero" src="gifs/DinWalkRight.gif" alt="Din">            
+            <img id="hero-3" class="hero" src="gifs/DinWalkRight.gif" alt="Din">
             <img id="enemy-1" class="enemy" src="gifs/DarknutIdle.gif" alt="Darknut">
             <img id="enemy-2" class="enemy" src="gifs/MoblinIdle.gif" alt="Moblin">
-            <img id="enemy-3" class="enemy" src="gifs/MoblinIdle.gif" alt="Moblin">        </div>
+            <img id="enemy-3" class="enemy" src="gifs/MoblinIdle.gif" alt="Moblin">
+        </div>
         <div id="combat-controls"></div>
     </main>
 
@@ -62,4 +83,5 @@
         });
     </script>
 </body>
+
 </html>
