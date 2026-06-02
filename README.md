@@ -1,6 +1,6 @@
 # Zelda: Oracle of Seasons Fan Project
 
-Sup. This website is a work in progress, multi purpose repository of nerd information and fun projects. The website is being used by the developer to study coding concepts and play with various elements of game design. The skeleton of the website has been built with AI for execution purposes, but the end goal of the website is for the code to be dissected and rewritten by the developer as they continue to learn various concepts.
+Sup. This website is a work in progress, multi purpose repository of nerd information and fun projects. The website is being used by the developer to study coding concepts and play with elements of game design. The skeleton of the website has been built with AI for startup momentum, but the end goal of the website is for the code to be dissected and rewritten by the developer as they continue to learn various concepts.
 
 ## Planned Features:
 - Character chatroom
