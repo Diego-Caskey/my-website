@@ -2,7 +2,7 @@
 :root {
     /* Page-level text (scales with viewport via clamp) */
     --font-h2: clamp(1.5rem, 4vw, 2.5rem);
-    --font-body: clamp(0.875rem, 5vw, 1rem);
+    --font-body: clamp(1rem, 5vw, 1.5rem);
     --font-nav: clamp(0.75rem, 1.5vw, 1rem);
     --font-nav-title: clamp(0.75rem, 1.5vw, 1rem);
     --font-project-name: clamp(0.1rem, 5vw, 1rem);
@@ -53,7 +53,7 @@ main h2::after {
 }
 
 main p {
-    font-family: ZeldaOracle;
+    font-family: serif;
     text-align: left;
     padding-top: 1rem;
     padding-left: 3rem;
@@ -70,6 +70,11 @@ main p {
 @font-face {
     font-family: ZeldaAwakening;
     src: url(fonts/ZeldaAwakening.ttf);
+}
+
+@font-face {
+    font-family: ZeldaHylia;
+    src: url(fonts/ZeldaHylia.otf);
 }
 
 @keyframes blink {
@@ -664,12 +669,16 @@ a.toc {
 }
 
 .cartridge-title {
-    font-family: ZeldaOracle;
-    font-weight: bold;
-    font-size: var(--font-project-name);
+    font-family: ZeldaHylia;
+    font-size: 1.5rem;
     color: rgba(153, 20, 35);
     text-align: center;
-    padding: 0 !important;
+    white-space: nowrap;
+    overflow: visible;
+    margin-top: -2.5rem;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .carousel-zone {

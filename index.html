@@ -29,19 +29,23 @@
     </header>
 
     <main>
+        <section id="preface">
+            <p>Zelda: Oracle of Seasons was released for the Game Boy Color in 2001.
+                This handheld console was only capable of showing ~56 colors on screen at once,
+                meaning that there were only 8 palettes of 4 colors for sprites and 8 palettes of 4 colors
+                for background elements.
+                The screen was approximately 160 pixels wide by 144 pixels tall, and utilized a single mono speaker in
+                addition to the same sound chip from the original Game Boy.
+            </p>
+        </section>
+
         <section id="reason1">
             <h2>Reason 1 : The Intro</h2>
             <a href="theater.html" class="selectable reason-banner reason1-link">
                 <div class="reason1-parallax"></div>
             </a>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas maximus vestibulum leo eget egestas. In
-                quis mauris augue. Aenean eu turpis non eros lacinia porttitor. Vivamus nec venenatis sem. Praesent
-                fringilla sit amet mi et egestas. Nunc semper, lacus non gravida suscipit, enim nisl euismod tellus,
-                vitae dapibus velit est non purus. Mauris faucibus quam vel placerat ultrices. Mauris tempor non augue
-                eget vestibulum. Aenean aliquet libero id lectus blandit suscipit. Etiam faucibus, justo non ullamcorper
-                egestas, ligula est lacinia arcu, in sollicitudin ante tortor nec tellus. Aenean venenatis finibus
-                convallis. Nunc a sollicitudin odio, in vehicula arcu. In tempor justo et consectetur aliquam. Praesent
-                fringilla sit amet mi et egestas. Nunc semper, lacus non gravi.</p>
+            <p>The intro of any Game Boy game is always around half a minute of cinematic epicness every time you loaded up a game. It sets the mood for your session, especially when your parents only allow you "X" amount of minutes to play. Some intros allude to certain story beats within the game, while others serve the purpose of world building. With this in mind, click on the banner above to watch the intro.
+            </p>
         </section>
 
         <section id="reason2">
@@ -139,38 +143,42 @@
                 <div class="carousel-track" id="carouselTrack">
                     <a href="tavern.html" class="cartridge-card">
                         <div class="cartridge-frame">
-                            <div class="cartridge-cover" style="background-image: url('images/Scene_ForestSummer.png');">
+                            <div class="cartridge-cover"
+                                style="background-image: url('images/ProjectArt_DimitrisCrisis.png');">
                             </div>
                         </div>
-                        <p class="cartridge-title">Dimitri's Crisis</p>
+                        <p class="cartridge-title">DIMITRI's CRISIS</p>
                     </a>
                     <a href="battle.html" class="cartridge-card">
                         <div class="cartridge-frame">
-                            <div class="cartridge-cover" style="background-image: url('images/Scene_Forestsummer.png');">
+                            <div class="cartridge-cover"
+                                style="background-image: url('images/ProjectArt_ForestEncounter.png');">
                             </div>
                         </div>
-                        <p class="cartridge-title">Turn Based RPG</p>
+                        <p class="cartridge-title">FOREST ENCOUNTER</p>
                     </a>
                     <a href="[PLACEHOLDER]" class="cartridge-card">
                         <div class="cartridge-frame">
-                            <div class="cartridge-cover" style="background-image: url('images/Scene_ForestSpring.png');">
+                            <div class="cartridge-cover"
+                                style="background-image: url('images/Scene_ForestSpring.png');">
                             </div>
                         </div>
-                        <p class="cartridge-title">[PLACEHOLDER]</p>
+                        <p class="cartridge-title">*PLACEHOLDER*</p>
                     </a>
                     <a href="[PLACEHOLDER]" class="cartridge-card">
                         <div class="cartridge-frame">
                             <div class="cartridge-cover" style="background-image: url('images/Scene_ForestFall.png');">
                             </div>
                         </div>
-                        <p class="cartridge-title">[PLACEHOLDER]</p>
+                        <p class="cartridge-title">*PLACEHOLDER*</p>
                     </a>
                     <a href="[PLACEHOLDER]" class="cartridge-card">
                         <div class="cartridge-frame">
-                            <div class="cartridge-cover" style="background-image: url('images/Scene_ForestWinter.png');">
+                            <div class="cartridge-cover"
+                                style="background-image: url('images/Scene_ForestWinter.png');">
                             </div>
                         </div>
-                        <p class="cartridge-title">[PLACEHOLDER]</p>
+                        <p class="cartridge-title">*PLACEHOLDER*</p>
                     </a>
                 </div>
                 <div class="carousel-zone carousel-zone-left" id="carouselLeft"></div>
@@ -263,7 +271,7 @@
 
                 if (isWrapping) {
                     const isAppearing = (rotationDirection === 1 && offset === 2) ||
-                                        (rotationDirection === -1 && offset === -2);
+                        (rotationDirection === -1 && offset === -2);
 
                     if (isAppearing) {
                         // Snap card to new position FIRST (no transition), then play wipe-in

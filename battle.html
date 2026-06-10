@@ -25,35 +25,50 @@
 
     <main>
         <div id="game-screen">
-        <div id="battle-scene">
-            <div id="hero-1">
-                <img id="h1-sprite" class="hero" src="gifs/LinkWalkRight.gif" alt="Link">
-                <div class="hp-bar"></div>
+            <div id="battle-scene">
+                <div id="hero-1" data-hero="link" onclick="selectHero('hero-1')">
+                    <img id="h1-sprite" class="hero" src="gifs/LinkWalkRight.gif" alt="Link">
+                    <div class="hp-bar"></div>
+                </div>
+                <div id="hero-2" data-hero="dimitri" onclick="selectHero('hero-2')">
+                    <img id="h2-sprite" class="hero" src="gifs/DimitriWalkRight.gif" alt="Dimitri">
+                    <div class="hp-bar"></div>
+                </div>
+                <div id="hero-3" data-hero="din" onclick="selectHero('hero-3')">
+                    <img id="h3-sprite" class="hero" src="gifs/DinWalkRight.gif" alt="Din">
+                    <div class="hp-bar"></div>
+                </div>
+                <div id="enemy-1" onclick="selectEnemy('enemy-1')">
+                    <img id="e1-sprite" class="enemy" src="gifs/DarknutIdle.gif" alt="Darknut">
+                    <div class="hp-bar"></div>
+                </div>
+                <div id="enemy-2" onclick="selectEnemy('enemy-2')">
+                    <img id="e2-sprite" class="enemy" src="gifs/MoblinIdle.gif" alt="Moblin">
+                    <div class="hp-bar"></div>
+                </div>
+                <div id="enemy-3" onclick="selectEnemy('enemy-3')">
+                    <img id="e3-sprite" class="enemy" src="gifs/MoblinIdle.gif" alt="Moblin">
+                    <div class="hp-bar"></div>
+                </div>
             </div>
-            <img id="hero-2" class="hero" src="gifs/DimitriWalkRight.gif" alt="Dimitri">
-            <img id="hero-3" class="hero" src="gifs/DinWalkRight.gif" alt="Din">
-            <img id="enemy-1" class="enemy" src="gifs/DarknutIdle.gif" alt="Darknut">
-            <img id="enemy-2" class="enemy" src="gifs/MoblinIdle.gif" alt="Moblin">
-            <img id="enemy-3" class="enemy" src="gifs/MoblinIdle.gif" alt="Moblin">
-        </div>
-        <div id="combat-controls">
-            <div class="turn-menu">
+            <div id="combat-controls">
+                <div class="turn-menu">
                     <div id="menu-lvl-start" class="menu-lvl">
                         <button id="start-1" class="start-option selected" data-value="atk">ATTACK</button>
                         <button id="start-2" class="start-option" data-value="skl">SKILL</button>
                     </div>
                     <div id="menu-lvl-atk" class="menu-lvl">
                         <button id="attack-b" class="atk-option go-back" data-value="back">&#9664;</button>
-                        <button id="attack-1" class="atk-option selected" data-value="atk1">SLASH</button>
-                        <button id="attack-2" class="atk-option" data-value="atk2">STAB</button>
+                        <button id="attack-1" class="atk-option selected" data-value="atk1">Attack 1</button>
+                        <button id="attack-2" class="atk-option" data-value="atk2">Attack 2</button>
                     </div>
                     <div id="menu-lvl-skl" class="menu-lvl">
                         <button id="skill-b" class="skl-option go-back" data-value="back">&#9664;</button>
-                        <button id="skill-1" class="skl-option selected" data-value="skl1">SPIN ATTACK</button>
-                        <button id="skill-2" class="skl-option" data-value="skl2">PLAY FLUTE</button>
+                        <button id="skill-1" class="skl-option selected" data-value="skl1">Skill 1</button>
+                        <button id="skill-2" class="skl-option" data-value="skl2">Skill 2</button>
                     </div>
                 </div>
-        </div>
+            </div>
         </div>
     </main>
 
@@ -63,13 +78,16 @@
 
     <!-- Sound Effects Stored In "sounds" Folder -->
     <audio id="entrySound" src="sounds/Oracle_Stairs.wav" autoplay></audio>
-    <audio id="hoverSound" src="sounds/Oracle_Text_Letter.wav"></audio>
+    <audio id="hoverSound" src="sounds/Oracle_Menu_Cursor.wav"></audio>
+    <audio id="selectSound" src="sounds/Oracle_Menu_Select.wav"></audio>
     <audio id="flipSound" src="sounds/Oracle_Text_Done.wav"></audio>
-    <audio id="cursorSound" src="sounds/Oracle_Menu_Cursor.wav"></audio>
     <audio id="menuOpenSound" src="sounds/Oracle_PauseMenu_Open.wav"></audio>
     <audio id="menuCloseSound" src="sounds/Oracle_PauseMenu_Close.wav"></audio>
 
-    <!-- JS to enable menu functionality -->
+    <!-- Background Music -->
+    <audio id="bgMusic" src="sounds/PLACEHOLDER.wav" loop autoplay></audio>
+
+    <!-- JS to enable navbar menu functionality -->
     <script>
         const menuOpenSound = document.getElementById('menuOpenSound');
         const menuCloseSound = document.getElementById('menuCloseSound');
@@ -84,6 +102,125 @@
             menuCloseSound.currentTime = 0;
             menuCloseSound.play();
         });
+    </script>
+
+    <!-- JS to combat controls functionality -->
+    <script>
+        const menuLevels = document.querySelectorAll('.menu-lvl');
+
+        // show only first menu on load
+        menuLevels.forEach(lvl => lvl.classList.remove('active'));
+        document.getElementById('menu-lvl-start').classList.add('active');
+
+        // attack button
+        document.getElementById('start-1').addEventListener('click', () => {
+            document.getElementById('menu-lvl-start').classList.remove('active');
+            document.getElementById('menu-lvl-atk').classList.add('active');
+        });
+
+        // skill button
+        document.getElementById('start-2').addEventListener('click', () => {
+            document.getElementById('menu-lvl-start').classList.remove('active');
+            document.getElementById('menu-lvl-skl').classList.add('active');
+        });
+
+        // back buttons
+        document.getElementById('attack-b').addEventListener('click', () => {
+            document.getElementById('menu-lvl-atk').classList.remove('active');
+            document.getElementById('menu-lvl-start').classList.add('active');
+        });
+
+        document.getElementById('skill-b').addEventListener('click', () => {
+            document.getElementById('menu-lvl-skl').classList.remove('active');
+            document.getElementById('menu-lvl-start').classList.add('active');
+        });
+    </script>
+
+    <!-- JS for button sounds -->
+    <script>
+        const hoverSound = document.getElementById('hoverSound');
+        const selectSound = document.getElementById('selectSound');
+        const buttons = document.querySelectorAll('#game-screen button');
+
+        buttons.forEach(button => {
+            button.addEventListener('mouseenter', () => {
+                hoverSound.currentTime = 0;
+                hoverSound.play();
+            });
+            button.addEventListener('click', () => {
+                selectSound.currentTime = 0;
+                selectSound.play();
+            });
+        });
+    </script>
+
+    <!-- JS to enable hero selection -->
+    <script>
+        function selectHero(heroId) {
+            const hero = document.getElementById(heroId);
+            const battleScene = document.getElementById('battle-scene');
+            const gameScreen = document.getElementById('game-screen');
+            const turnMenu = document.querySelector('.turn-menu');
+
+            const heroRect = hero.getBoundingClientRect();
+            const screenRect = gameScreen.getBoundingClientRect();
+
+            const left = heroRect.left - screenRect.left;
+            const top = heroRect.bottom - screenRect.top;
+
+            turnMenu.style.left = left + 'px';
+            turnMenu.style.top = top + 'px';
+            turnMenu.classList.add('visible');
+
+            document.querySelectorAll('.menu-lvl').forEach(lvl => lvl.classList.remove('active'));
+            document.getElementById('menu-lvl-start').classList.add('active');
+        }
+    </script>
+
+    <!-- JS to enable movesets -->
+    <script>
+        const heroMoves = {
+            link: {
+                atk1: 'SLASH', atk2: 'STAB',
+                skl1: 'SPIN ATTACK', skl2: 'PLAY FLUTE'
+            },
+            dimitri: {
+                atk1: 'BITE', atk2: 'CHOMP',
+                skl1: 'BIGGER BITE', skl2: 'BIGGER CHOMP'
+            },
+            din: {
+                atk1: 'KICK', atk2: 'EMBER',
+                skl1: 'FLAME DANCE', skl2: 'CHEER ON'
+            }
+        };
+
+        function selectHero(heroId) {
+            const hero = document.getElementById(heroId);
+            const gameScreen = document.getElementById('game-screen');
+            const turnMenu = document.querySelector('.turn-menu');
+
+            // get hero name from data attribute
+            const heroName = hero.dataset.hero;
+            const moves = heroMoves[heroName];
+
+            // update attack buttons
+            document.getElementById('attack-1').textContent = moves.atk1;
+            document.getElementById('attack-2').textContent = moves.atk2;
+
+            // update skill buttons
+            document.getElementById('skill-1').textContent = moves.skl1;
+            document.getElementById('skill-2').textContent = moves.skl2;
+
+            // position and show menu
+            const heroRect = hero.getBoundingClientRect();
+            const screenRect = gameScreen.getBoundingClientRect();
+            turnMenu.style.left = (heroRect.left - screenRect.left) + 'px';
+            turnMenu.style.top = (heroRect.bottom - screenRect.top) + 'px';
+            turnMenu.classList.add('visible');
+
+            document.querySelectorAll('.menu-lvl').forEach(lvl => lvl.classList.remove('active'));
+            document.getElementById('menu-lvl-start').classList.add('active');
+        }
     </script>
 </body>
 
