@@ -10,7 +10,7 @@
 
 <body>
     <header>
-        <img src="images/OoS_Logo.png" alt="English logo for Zelda: Oracle of Seasons" height="250px">
+        <img src="images/OoS_Logo.png" alt="English logo for Zelda: Oracle of Seasons">
         <div id="navbar">
             <div class="nav-dropdown">
                 <button class="nav-dropdown-button">&#9660; MENU</button>
@@ -23,35 +23,103 @@
     </header>
 
     <main>
-        <img src="gifs/LinkBabyDown.gif" alt="Dimitri animated">
+        <div id="chatroom">
+
+            <!-- CHARACTER CAROUSEL -->
+            <div id="char-carousel">
+                <div id="char-track">
+                    <div class="char-card" data-name="LINK" data-greeting="...">
+                        <img src="gifs/LinkWalkDown.gif" alt="Link">
+                    </div>
+                    <div class="char-card" data-name="Zelda" data-greeting="...">
+                        <img src="gifs/ZeldaIdleDown.gif" alt="Din">
+                    </div>
+                    <div class="char-card" data-name="DIMITRI" data-greeting="...">
+                        <img src="gifs/DimitriWalkDown.gif" alt="Dimitri">
+                    </div>
+                    <div class="char-card" data-name="MAPLE" data-greeting="...">
+                        <img src="gifs/MapleIdle.gif" alt="Maple">
+                    </div>
+                </div>
+                <div class="carousel-zone carousel-zone-left" id="charLeft"></div>
+                <div class="carousel-zone carousel-zone-right" id="charRight"></div>
+            </div>
+
+            <!-- DIALOGUE BOX -->
+            <div id="dialogue-box">
+                <div id="dialogue-header">
+                    <span id="dialogue-name">???</span>
+                </div>
+                <div id="dialogue-text">Click a character to begin.</div>
+            </div>
+
+            <!-- PLAYER INPUT -->
+            <div id="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Say something...">
+                <button id="chat-send">SEND</button>
+            </div>
+
+        </div>
     </main>
 
     <footer>
-        <p>&copy; Diego Caskey 2026</p>
     </footer>
 
-    <!-- Sound Effects Stored In "sounds" Folder -->
     <audio id="entrySound" src="sounds/Oracle_Stairs.wav" autoplay></audio>
-    <audio id="hoverSound" src="sounds/Oracle_Text_Letter.wav"></audio>
-    <audio id="flipSound" src="sounds/Oracle_Text_Done.wav"></audio>
-    <audio id="cursorSound" src="sounds/Oracle_Menu_Cursor.wav"></audio>
+    <audio id="textSound" src="sounds/Oracle_Text_Letter.wav"></audio>
     <audio id="menuOpenSound" src="sounds/Oracle_PauseMenu_Open.wav"></audio>
     <audio id="menuCloseSound" src="sounds/Oracle_PauseMenu_Close.wav"></audio>
 
-    <!-- JS to enable menu functionality -->
     <script>
+        // navbar sounds
         const menuOpenSound = document.getElementById('menuOpenSound');
         const menuCloseSound = document.getElementById('menuCloseSound');
         const dropdown = document.querySelector('.nav-dropdown');
+        dropdown.addEventListener('mouseenter', () => { menuOpenSound.currentTime = 0; menuOpenSound.play(); });
+        dropdown.addEventListener('mouseleave', () => { menuCloseSound.currentTime = 0; menuCloseSound.play(); });
+    </script>
 
-        dropdown.addEventListener('mouseenter', () => {
-            menuOpenSound.currentTime = 0;
-            menuOpenSound.play();
+    <script>
+        // carousel
+        const cards = document.querySelectorAll('.char-card');
+        let activeIndex = 0;
+
+        function updateCarousel() {
+            cards.forEach((card, idx) => {
+                card.classList.remove('active', 'left', 'right', 'hidden');
+                const offset = idx - activeIndex;
+                if (offset === 0) card.classList.add('active');
+                else if (offset === -1 || offset === cards.length - 1) card.classList.add('left');
+                else if (offset === 1 || offset === -(cards.length - 1)) card.classList.add('right');
+                else card.classList.add('hidden');
+            });
+
+            // show active character greeting
+            const active = cards[activeIndex];
+            document.getElementById('dialogue-name').textContent = active.dataset.name;
+            document.getElementById('dialogue-text').textContent = active.dataset.greeting;
+        }
+
+        document.getElementById('charLeft').addEventListener('click', () => {
+            activeIndex = (activeIndex - 1 + cards.length) % cards.length;
+            updateCarousel();
         });
 
-        dropdown.addEventListener('mouseleave', () => {
-            menuCloseSound.currentTime = 0;
-            menuCloseSound.play();
+        document.getElementById('charRight').addEventListener('click', () => {
+            activeIndex = (activeIndex + 1) % cards.length;
+            updateCarousel();
+        });
+
+        updateCarousel();
+    </script>
+
+    <script>
+        // send message placeholder
+        document.getElementById('chat-send').addEventListener('click', () => {
+            const input = document.getElementById('chat-input').value.trim();
+            if (!input) return;
+            document.getElementById('dialogue-text').textContent = '...'; // placeholder response
+            document.getElementById('chat-input').value = '';
         });
     </script>
 </body>

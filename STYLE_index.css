@@ -22,8 +22,12 @@
     text-decoration: none;
 }
 
+html {
+    min-width: 480px;
+}
+
 body {
-    background-color: wheat
+    background-color: wheat;
 }
 
 section {
@@ -56,8 +60,8 @@ main p {
     font-family: serif;
     text-align: left;
     padding-top: 1rem;
-    padding-left: 3rem;
-    padding-right: 3rem;
+    padding-left: 15vw;
+    padding-right: 15vw;
     font-size: var(--font-body);
     color: rgb(0, 0, 0);
 }
@@ -487,54 +491,89 @@ a.toc {
 }
 
 @keyframes season-cycle {
-    0%   { opacity: 0; }
-    5%   { opacity: 1; }
-    25%  { opacity: 1; }
-    30%  { opacity: 0; }
-    100% { opacity: 0; }
+    0% {
+        opacity: 0;
+    }
+
+    5% {
+        opacity: 1;
+    }
+
+    25% {
+        opacity: 1;
+    }
+
+    30% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
 }
 
 /* END REASON 4 */
 
 /* BEGIN PROJECTS */
 
-#projects {
-    padding: 0;
-    margin-bottom: 4rem;
-    width: 100%;
-}
-
-.carousel {
+#carousel {
     position: relative;
     width: 100%;
-    height: 50vh;
-    overflow-x: hidden;
-    overflow-y: visible;
+    height: 20rem;
     perspective: 1200px;
-}
-
-.carousel-track {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
+    margin-bottom: 1rem;
+    margin-top: -1.5rem;
 }
 
 .cartridge-card {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 25%;
-    aspect-ratio: 1 / 1;
+    width: 20%;
     transform: translate(-50%, -50%);
     transition: transform 0.5s ease, opacity 0.5s ease, filter 0.5s ease;
     text-decoration: none;
     pointer-events: none;
     z-index: 1;
-    -webkit-mask-size: 100% 100%;
-    mask-size: 100% 100%;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
+}
+
+.cartridge-frame {
+    width: 100%;
+    image-rendering: pixelated;
+    position: relative;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+}
+
+.cartridge-cover {
+    position: absolute;
+    top: 58%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(104.5%);
+    width: 70%;
+    aspect-ratio: 42 / 37;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+}
+
+.cartridge-title {
+    font-family: ZeldaHylia;
+    font-size: 1.5rem;
+    color: rgba(153, 20, 35);
+    text-align: center;
+    white-space: nowrap;
+    overflow: visible;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.frame-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    image-rendering: pixelated;
 }
 
 .cartridge-card.active {
@@ -560,7 +599,7 @@ a.toc {
 .cartridge-card.far-left {
     transform: translate(calc(-50% - 45vw), -50%) scale(0.4);
     z-index: 3;
-    opacity: 0.4;
+    opacity: 0;
     filter: blur(2px);
 }
 
@@ -568,7 +607,7 @@ a.toc {
 .cartridge-card.far-right {
     transform: translate(calc(-50% + 45vw), -50%) scale(0.4);
     z-index: 3;
-    opacity: 0.4;
+    opacity: 0;
     filter: blur(2px);
 }
 
@@ -576,8 +615,6 @@ a.toc {
     opacity: 0;
 }
 
-/* Directional wipe animations for wrapping cards.
-   Higher specificity to override the position-class mask defaults. */
 .cartridge-card.wipe-out-left {
     animation: wipeOutLeft 0.4s linear forwards;
 }
@@ -594,91 +631,8 @@ a.toc {
     animation: wipeInRight 0.4s linear forwards;
 }
 
-@keyframes wipeOutLeft {
-    from {
-        -webkit-mask-image: linear-gradient(to left, transparent 0%, transparent 0%, black 0%, black 100%);
-        mask-image: linear-gradient(to left, transparent 0%, transparent 0%, black 0%, black 100%);
-    }
-    to {
-        -webkit-mask-image: linear-gradient(to left, transparent 0%, transparent 100%, black 100%, black 100%);
-        mask-image: linear-gradient(to left, transparent 0%, transparent 100%, black 100%, black 100%);
-    }
-}
-
-@keyframes wipeOutRight {
-    from {
-        -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 0%, black 0%, black 100%);
-        mask-image: linear-gradient(to right, transparent 0%, transparent 0%, black 0%, black 100%);
-    }
-    to {
-        -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 100%, black 100%, black 100%);
-        mask-image: linear-gradient(to right, transparent 0%, transparent 100%, black 100%, black 100%);
-    }
-}
-
-@keyframes wipeInLeft {
-    from {
-        -webkit-mask-image: linear-gradient(to left, transparent 0%, transparent 100%, black 100%, black 100%);
-        mask-image: linear-gradient(to left, transparent 0%, transparent 100%, black 100%, black 100%);
-    }
-    to {
-        -webkit-mask-image: linear-gradient(to left, transparent 0%, transparent 0%, black 0%, black 100%);
-        mask-image: linear-gradient(to left, transparent 0%, transparent 0%, black 0%, black 100%);
-    }
-}
-
-@keyframes wipeInRight {
-    from {
-        -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 100%, black 100%, black 100%);
-        mask-image: linear-gradient(to right, transparent 0%, transparent 100%, black 100%, black 100%);
-    }
-    to {
-        -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 0%, black 0%, black 100%);
-        mask-image: linear-gradient(to right, transparent 0%, transparent 0%, black 0%, black 100%);
-    }
-}
-
-.cartridge-frame {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    background-image: url('images/Frame_Cartridge.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    image-rendering: pixelated;
-    position: relative;
-    margin-bottom: -1rem;
-    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
-}
-
 .cartridge-card.active .cartridge-frame {
     filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.5));
-}
-
-.cartridge-cover {
-    position: absolute;
-    top: 54.73%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(57.5%);
-    width: 70%;
-    aspect-ratio: 42 / 37;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    image-rendering: pixelated;
-}
-
-.cartridge-title {
-    font-family: ZeldaHylia;
-    font-size: 1.5rem;
-    color: rgba(153, 20, 35);
-    text-align: center;
-    white-space: nowrap;
-    overflow: visible;
-    margin-top: -2.5rem;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
 }
 
 .carousel-zone {
@@ -696,6 +650,54 @@ a.toc {
 
 .carousel-zone-right {
     right: 0;
+}
+
+@keyframes wipeOutLeft {
+    from {
+        -webkit-mask-image: linear-gradient(to left, transparent 0%, transparent 0%, black 0%, black 100%);
+        mask-image: linear-gradient(to left, transparent 0%, transparent 0%, black 0%, black 100%);
+    }
+
+    to {
+        -webkit-mask-image: linear-gradient(to left, transparent 0%, transparent 100%, black 100%, black 100%);
+        mask-image: linear-gradient(to left, transparent 0%, transparent 100%, black 100%, black 100%);
+    }
+}
+
+@keyframes wipeOutRight {
+    from {
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 0%, black 0%, black 100%);
+        mask-image: linear-gradient(to right, transparent 0%, transparent 0%, black 0%, black 100%);
+    }
+
+    to {
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 100%, black 100%, black 100%);
+        mask-image: linear-gradient(to right, transparent 0%, transparent 100%, black 100%, black 100%);
+    }
+}
+
+@keyframes wipeInLeft {
+    from {
+        -webkit-mask-image: linear-gradient(to left, transparent 0%, transparent 100%, black 100%, black 100%);
+        mask-image: linear-gradient(to left, transparent 0%, transparent 100%, black 100%, black 100%);
+    }
+
+    to {
+        -webkit-mask-image: linear-gradient(to left, transparent 0%, transparent 0%, black 0%, black 100%);
+        mask-image: linear-gradient(to left, transparent 0%, transparent 0%, black 0%, black 100%);
+    }
+}
+
+@keyframes wipeInRight {
+    from {
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 100%, black 100%, black 100%);
+        mask-image: linear-gradient(to right, transparent 0%, transparent 100%, black 100%, black 100%);
+    }
+
+    to {
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 0%, black 0%, black 100%);
+        mask-image: linear-gradient(to right, transparent 0%, transparent 0%, black 0%, black 100%);
+    }
 }
 
 /* END PROJECTS */
@@ -798,7 +800,7 @@ footer {
         margin-top: 0.25rem;
     }
 
-    /* Reason 2 (sprites) — full height, no zoom */
+    /* Reason 2 700px */
     .sprite-track img {
         height: 100%;
         zoom: unset;
@@ -808,4 +810,18 @@ footer {
         display: flex;
         align-items: center;
     }
+
+    /* Projects 700px */
+    .nav-title {
+        font-size: 0.75rem;
+        white-space: nowrap;
+    }
+
+    #carousel {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 5 / 2;
+    perspective: 1200px;
+    margin-bottom: 4rem;
+    margin-top: -1.5rem;
 }
